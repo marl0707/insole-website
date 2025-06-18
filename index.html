@@ -515,6 +515,195 @@
             transform: translateY(-2px);
         }
 
+        /* 光るカード効果 */
+        .glow-card {
+            background: var(--white);
+            padding: 3.5rem 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,201,167,0.1);
+        }
+
+        .glow-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,201,167,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .glow-card:hover::before {
+            left: 100%;
+        }
+
+        .glow-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 80px rgba(0,201,167,0.2);
+            border-color: rgba(0,201,167,0.3);
+        }
+
+        .glow-card .glow-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #00c9a7 0%, #43e97b 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2.5rem;
+            color: var(--white);
+            font-size: 2.2rem;
+            box-shadow: 0 10px 30px rgba(0,201,167,0.3);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .glow-card:hover .glow-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(0,201,167,0.4);
+        }
+
+        .glow-card:hover .glow-icon::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #00c9a7, #43e97b, #00c9a7);
+            border-radius: 50%;
+            z-index: -1;
+            animation: glowPulse 2s infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        /* スライドアップカード効果 */
+        .slide-card {
+            background: var(--white);
+            padding: 3.5rem 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,201,167,0.1);
+        }
+
+        .slide-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #00c9a7, #43e97b, #00c9a7);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .slide-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .slide-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 80px rgba(0,201,167,0.15);
+        }
+
+        .slide-card .slide-content {
+            transform: translateY(0);
+            transition: transform 0.4s ease;
+        }
+
+        .slide-card:hover .slide-content {
+            transform: translateY(-10px);
+        }
+
+        .slide-card .slide-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #00c9a7 0%, #43e97b 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2.5rem;
+            color: var(--white);
+            font-size: 2.2rem;
+            box-shadow: 0 10px 30px rgba(0,201,167,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .slide-card:hover .slide-icon {
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 15px 40px rgba(0,201,167,0.4);
+        }
+
+        /* ズームカード効果 */
+        .zoom-card {
+            background: var(--white);
+            padding: 3.5rem 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,201,167,0.1);
+        }
+
+        .zoom-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 80px rgba(0,201,167,0.15);
+        }
+
+        .zoom-card .zoom-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #00c9a7 0%, #43e97b 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2.5rem;
+            color: var(--white);
+            font-size: 2.2rem;
+            box-shadow: 0 10px 30px rgba(0,201,167,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .zoom-card:hover .zoom-icon {
+            transform: scale(1.2);
+            box-shadow: 0 15px 40px rgba(0,201,167,0.4);
+        }
+
+        .zoom-card .zoom-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,201,167,0.05) 0%, rgba(67,233,123,0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .zoom-card:hover .zoom-bg {
+            opacity: 1;
+        }
+
         /* 料金・保険・助成セクション */
         .pricing {
             padding: 100px 0;
@@ -852,6 +1041,26 @@
 
             .case-image {
                 height: 150px;
+            }
+
+            /* 新しいギミックのレスポンシブ調整 */
+            .glow-card, .slide-card, .zoom-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .glow-icon, .slide-icon, .zoom-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .glow-card:hover, .slide-card:hover, .zoom-card:hover {
+                transform: translateY(-5px) scale(1.01);
+            }
+
+            .zoom-card:hover {
+                transform: scale(1.02);
             }
         }
 
@@ -1437,54 +1646,30 @@
         <div class="container">
             <h2 class="section-title scroll-animate">なぜ子どもの足にインソールが必要なのか</h2>
             <div class="features-grid">
-                <div class="flip-card scroll-animate">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="feature-icon">
-                                <i class="fas fa-exclamation-triangle"></i>
-                            </div>
-                            <h3>現代社会で増える足のトラブル</h3>
-                            <p>足は「第二の心臓」と呼ばれ、全身のバランスを支える重要な土台です。</p>
-                            <div style="margin-top: 1rem; font-size: 0.9rem; color: #00c9a7;">
-                                <i class="fas fa-mouse-pointer"></i> マウスを乗せて詳細を見る
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <h3>現代社会で増える足のトラブル</h3>
-                            <p>足のアーチが崩れると、姿勢が悪くなり、膝や腰、肩への負担が増大。スポーツでのケガにもつながります。</p>
-                            <ul>
-                                <li>小学生の40％以上に足部変形</li>
-                                <li>姿勢の悪化や運動能力の低下</li>
-                                <li>転倒リスクの増加</li>
-                                <li>スポーツでのケガの原因</li>
-                            </ul>
-                            <a href="#contact" class="cta-btn">詳しく相談する</a>
-                        </div>
+                <div class="glow-card scroll-animate">
+                    <div class="glow-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>現代社会で増える足のトラブル</h3>
+                    <p>足は「第二の心臓」と呼ばれ、全身のバランスを支える重要な土台です。<br>足のアーチが崩れると、姿勢が悪くなり、膝や腰、肩への負担が増大。スポーツでのケガにもつながります。</p>
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 15px; text-align: left;">
+                        <h4 style="color: #00c9a7; margin-bottom: 1rem;">📊 調査結果</h4>
+                        <p style="font-size: 0.95rem; color: #666;">小学生の40％以上に足部変形が見られ、これは姿勢の悪化や運動能力の低下、転倒リスクにつながります。</p>
                     </div>
                 </div>
-                <div class="flip-card scroll-animate">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="feature-icon">
-                                <i class="fas fa-shoe-prints"></i>
-                            </div>
-                            <h3>オーダーメイドインソールの意義</h3>
-                            <p>一人ひとりの足の形状に合わせて作製されるインソールは、足本来の機能を取り戻します。</p>
-                            <div style="margin-top: 1rem; font-size: 0.9rem; color: #00c9a7;">
-                                <i class="fas fa-mouse-pointer"></i> マウスを乗せて詳細を見る
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <h3>オーダーメイドインソールの意義</h3>
-                            <p>ケガをしない体づくりは、足元から始まります。正しい姿勢へと導くインソールの効果をご紹介します。</p>
-                            <ul>
-                                <li>変形の矯正効果</li>
-                                <li>正しい足のポジション形成</li>
-                                <li>アーチ構造の形成による力の分散</li>
-                                <li>姿勢改善と疲労軽減</li>
-                            </ul>
-                            <a href="#treatment" class="cta-btn">治療の流れを見る</a>
-                        </div>
+                <div class="glow-card scroll-animate">
+                    <div class="glow-icon">
+                        <i class="fas fa-shoe-prints"></i>
+                    </div>
+                    <h3>オーダーメイドインソールの意義</h3>
+                    <p>一人ひとりの足の形状に合わせて作製されるインソールは、足本来の機能を取り戻し、正しい姿勢へと導きます。<br>ケガをしない体づくりは、足元から始まります。</p>
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 15px; text-align: left;">
+                        <h4 style="color: #00c9a7; margin-bottom: 1rem;">✨ 期待される効果</h4>
+                        <ul style="font-size: 0.95rem; color: #666; list-style: none; padding: 0;">
+                            <li>✓ 変形の矯正</li>
+                            <li>✓ 正しい足のポジション形成</li>
+                            <li>✓ アーチ構造の形成による力の分散</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -1496,27 +1681,14 @@
         <div class="container">
             <h2 class="section-title scroll-animate">保険適応・小児医療費助成について</h2>
             <div class="pricing-grid">
-                <div class="flip-card scroll-animate">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <h3>保険適応でのインソール製作</h3>
-                            <div class="price">医師の診断のもと製作</div>
-                            <div class="price-label">インソール代金の全額を一旦お支払いいただき、ご自身で健康保険組合に請求していただく形となります。</div>
-                            <div style="margin-top: 1rem; font-size: 0.9rem; color: #00c9a7;">
-                                <i class="fas fa-mouse-pointer"></i> マウスを乗せて詳細を見る
-                            </div>
+                <div class="slide-card scroll-animate">
+                    <div class="slide-content">
+                        <div class="slide-icon">
+                            <i class="fas fa-stethoscope"></i>
                         </div>
-                        <div class="flip-card-back">
-                            <h3>保険適応でのインソール製作</h3>
-                            <p>医師の診断により、保険適応でのインソール製作が可能です。</p>
-                            <ul>
-                                <li>医師による診断・処方</li>
-                                <li>義肢装具士による製作</li>
-                                <li>保険適応での費用負担</li>
-                                <li>健康保険組合への請求</li>
-                            </ul>
-                            <a href="#contact" class="cta-btn">保険適応の相談</a>
-                        </div>
+                        <h3>保険適応でのインソール製作</h3>
+                        <div class="price">医師の診断のもと製作</div>
+                        <div class="price-label">インソール代金の全額を一旦お支払いいただき、ご自身で健康保険組合に請求していただく形となります。</div>
                     </div>
                 </div>
                 <div class="flip-card scroll-animate">
@@ -1542,36 +1714,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="flip-card scroll-animate">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <h3>保険適応で製作可能な疾患</h3>
-                            <ul class="disease-list">
-                                <li>扁平足</li>
-                                <li>凹足（ハイアーチ）</li>
-                                <li>外反母趾</li>
-                                <li>足底腱膜炎</li>
-                                <li>モートン病</li>
-                                <li>胼胝（タコ）・鶏眼（ウオノメ）</li>
-                            </ul>
-                            <div style="margin-top: 1rem; font-size: 0.9rem; color: #00c9a7;">
-                                <i class="fas fa-mouse-pointer"></i> マウスを乗せて詳細を見る
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <h3>保険適応疾患の詳細</h3>
-                            <p>以下の疾患で保険適応でのインソール製作が可能です。</p>
-                            <ul>
-                                <li>扁平足：足のアーチが崩れた状態</li>
-                                <li>凹足：足のアーチが高すぎる状態</li>
-                                <li>外反母趾：親指が外側に曲がる状態</li>
-                                <li>足底腱膜炎：足の裏の痛み</li>
-                                <li>モートン病：足の指の間の痛み</li>
-                                <li>胼胝・鶏眼：足の角質化</li>
-                            </ul>
-                            <a href="#contact" class="cta-btn">症状の相談</a>
-                        </div>
+                <div class="zoom-card scroll-animate">
+                    <div class="zoom-bg"></div>
+                    <div class="zoom-icon">
+                        <i class="fas fa-list-check"></i>
                     </div>
+                    <h3>保険適応で製作可能な疾患</h3>
+                    <ul class="disease-list">
+                        <li>扁平足</li>
+                        <li>凹足（ハイアーチ）</li>
+                        <li>外反母趾</li>
+                        <li>足底腱膜炎</li>
+                        <li>モートン病</li>
+                        <li>胼胝（タコ）・鶏眼（ウオノメ）</li>
+                    </ul>
                 </div>
             </div>
             <div style="margin-top:2rem; color:#888; font-size:1rem;">
@@ -1588,28 +1744,13 @@
             <div class="flow-container">
                 <div class="flow-line"></div>
                 <div class="flow-steps">
-                    <div class="flip-card scroll-animate">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="step-number">1</div>
-                                <h3>診察</h3>
-                                <p>医師が足の状態を診察します。必要に応じてレントゲン検査やエコー検査を行う場合がございます。</p>
-                                <div style="margin-top: 1rem; font-size: 0.9rem; color: #00c9a7;">
-                                    <i class="fas fa-mouse-pointer"></i> マウスを乗せて詳細を見る
-                                </div>
-                            </div>
-                            <div class="flip-card-back">
-                                <h3>診察の詳細</h3>
-                                <p>専門医による詳細な診察で、足の問題を正確に把握します。</p>
-                                <ul>
-                                    <li>足の形状・変形の確認</li>
-                                    <li>歩行パターンの分析</li>
-                                    <li>レントゲン検査（必要時）</li>
-                                    <li>エコー検査（必要時）</li>
-                                </ul>
-                                <a href="#contact" class="cta-btn">診察の予約</a>
-                            </div>
+                    <div class="zoom-card scroll-animate">
+                        <div class="zoom-bg"></div>
+                        <div class="zoom-icon">
+                            <i class="fas fa-user-md"></i>
                         </div>
+                        <h3>診察</h3>
+                        <p>医師が足の状態を診察します。必要に応じてレントゲン検査やエコー検査を行う場合がございます。</p>
                     </div>
                     <div class="flip-card scroll-animate">
                         <div class="flip-card-inner">
@@ -1634,28 +1775,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flip-card scroll-animate">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="step-number">3</div>
-                                <h3>完成</h3>
-                                <p>約1週間でインソールが完成します。</p>
-                                <div style="margin-top: 1rem; font-size: 0.9rem; color: #00c9a7;">
-                                    <i class="fas fa-mouse-pointer"></i> マウスを乗せて詳細を見る
-                                </div>
-                            </div>
-                            <div class="flip-card-back">
-                                <h3>完成・調整の詳細</h3>
-                                <p>完成したインソールの調整と使用方法の指導を行います。</p>
-                                <ul>
-                                    <li>約1週間での完成</li>
-                                    <li>装着感の調整</li>
-                                    <li>使用方法の指導</li>
-                                    <li>フォローアップ診察</li>
-                                </ul>
-                                <a href="#contact" class="cta-btn">完成後の相談</a>
-                            </div>
+                    <div class="glow-card scroll-animate">
+                        <div class="glow-icon">
+                            <i class="fas fa-check-circle"></i>
                         </div>
+                        <h3>完成</h3>
+                        <p>約1週間でインソールが完成します。装着感の調整と使用方法の指導を行います。</p>
                     </div>
                 </div>
             </div>
@@ -1690,49 +1815,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="flip-card scroll-animate">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="歩行" class="case-image">
-                            <h3>歩くと転びやすい・疲れやすい</h3>
-                            <p>筋力が低下してくると正しい姿勢を保持できず、骨格のバランスが崩れてしまい、転倒やつまずきを起こすリスクが上昇します。</p>
-                            <div style="margin-top: 1rem; font-size: 0.9rem; color: #43e97b;">
-                                <i class="fas fa-mouse-pointer"></i> マウスを乗せて詳細を見る
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <h3>歩くと転びやすい・疲れやすい</h3>
-                            <p>適した足底装具を使用することで地面との設置面積が増えるとバランスをとりやすくなり、転倒やつまずきのリスクを抑えることができます。</p>
-                            <ul>
-                                <li>筋力低下による姿勢の悪化</li>
-                                <li>骨格バランスの崩れ</li>
-                                <li>転倒・つまずきリスクの上昇</li>
-                                <li>足底装具による安定性向上</li>
-                            </ul>
-                            <a href="#treatment" class="cta-btn">安定性改善の相談</a>
-                        </div>
+                <div class="glow-card scroll-animate">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="歩行" class="case-image">
+                    <h3>歩くと転びやすい・疲れやすい</h3>
+                    <p>筋力が低下してくると正しい姿勢を保持できず、骨格のバランスが崩れてしまい、転倒やつまずきを起こすリスクが上昇し、疲れやすくなってしまいます。<br>適した足底装具を使用することで地面との設置面積が増えるとバランスをとりやすくなり、転倒やつまずきのリスクを抑えることができます。</p>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px; border-left: 4px solid #43e97b;">
+                        <h4 style="color: #43e97b; margin-bottom: 0.5rem; font-size: 1rem;">⚡ 改善効果</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.9;">適切なインソールにより、歩行時の安定性が向上し、疲労感が軽減されます。</p>
                     </div>
                 </div>
-                <div class="flip-card scroll-animate">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="足の痛み" class="case-image">
-                            <h3>足が痛い・変形のある方</h3>
-                            <p>足の痛み、変形などがある場合、特定の場所にかかる過度な負担を軽減する除圧などで根本的な原因にアプローチした治療が有効です。</p>
-                            <div style="margin-top: 1rem; font-size: 0.9rem; color: #43e97b;">
-                                <i class="fas fa-mouse-pointer"></i> マウスを乗せて詳細を見る
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <h3>足が痛い・変形のある方</h3>
-                            <p>痛みの原因となる負荷を分散し、足本来の機能を回復させることで根本的な改善を目指します。</p>
-                            <ul>
-                                <li>特定部位への過度な負担</li>
-                                <li>除圧による痛みの軽減</li>
-                                <li>根本的な原因へのアプローチ</li>
-                                <li>足本来の機能回復</li>
-                            </ul>
-                            <a href="#contact" class="cta-btn">痛み改善の相談</a>
+                <div class="slide-card scroll-animate">
+                    <div class="slide-content">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="足の痛み" class="case-image">
+                        <h3>足が痛い・変形のある方</h3>
+                        <p>足の痛み、変形などがある場合、特定の場所にかかる過度な負担を軽減する除圧などで根本的な原因にアプローチした治療が有効です。</p>
+                        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px; border-left: 4px solid #43e97b;">
+                            <h4 style="color: #43e97b; margin-bottom: 0.5rem; font-size: 1rem;">🎯 根本的アプローチ</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.9;">痛みの原因となる負荷を分散し、足本来の機能を回復させることで根本的な改善を目指します。</p>
                         </div>
                     </div>
                 </div>
@@ -2070,6 +2169,39 @@
             });
         });
 
+        // 光るカード効果のインタラクション
+        document.querySelectorAll('.glow-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // スライドアップカード効果のインタラクション
+        document.querySelectorAll('.slide-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // ズームカード効果のインタラクション
+        document.querySelectorAll('.zoom-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
         // フリップカードのタッチ対応（モバイル）
         document.querySelectorAll('.flip-card').forEach(card => {
             let isFlipped = false;
@@ -2107,6 +2239,39 @@
             // フォーカス可能にする
             card.setAttribute('tabindex', '0');
         });
+
+        // カードの音響効果（オプション）
+        function playHoverSound() {
+            // ブラウザが音声をサポートしている場合のみ
+            if ('AudioContext' in window || 'webkitAudioContext' in window) {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.1);
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.1);
+            }
+        }
+
+        // カードホバー時の音響効果（軽微な効果）
+        document.querySelectorAll('.glow-card, .slide-card, .zoom-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                // 音響効果は軽微に設定
+                if (Math.random() < 0.3) { // 30%の確率で再生
+                    playHoverSound();
+                }
+            });
+        });
     </script>
 </body>
 </html>
+
