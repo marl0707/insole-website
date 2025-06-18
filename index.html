@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #2C3E50;
-            --accent-color: #E74C3C;
-            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --text-dark: #2C3E50;
+            --primary-color: #0f2027;
+            --secondary-color: #2c5364;
+            --accent-color: #00c9a7;
+            --gradient-primary: linear-gradient(135deg, #0f2027 0%, #2c5364 50%, #00c9a7 100%);
+            --gradient-accent: linear-gradient(135deg, #00c9a7 0%, #43e97b 100%);
+            --text-dark: #0f2027;
             --text-light: #7F8C8D;
             --white: #FFFFFF;
             --shadow-soft: 0 10px 30px rgba(0,0,0,0.1);
@@ -52,7 +53,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(15,32,39,0.95);
             backdrop-filter: blur(20px);
             z-index: 1000;
             transition: all 0.3s ease;
@@ -91,7 +92,7 @@
 
         .nav-menu a {
             text-decoration: none;
-            color: var(--text-dark);
+            color: var(--white);
             font-weight: 500;
             position: relative;
             transition: all 0.3s ease;
@@ -104,7 +105,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--gradient-primary);
+            background: var(--gradient-accent);
             transition: width 0.3s ease;
         }
 
@@ -122,21 +123,23 @@
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        .hero-bg-video {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
-            opacity: 0.1;
-            z-index: 1;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            object-fit: cover;
+            z-index: 0;
+            filter: brightness(0.7) blur(1px);
+        }
+
+        .hero-svg {
+            position: absolute;
+            bottom: 0; left: 0; width: 100vw; height: 120px;
+            z-index: 2;
         }
 
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
@@ -152,6 +155,7 @@
             color: var(--white);
             margin-bottom: 1.5rem;
             line-height: 1.2;
+            text-shadow: 0 8px 32px rgba(0,0,0,0.3);
             animation: slideInLeft 1s ease-out;
         }
 
@@ -169,8 +173,8 @@
         }
 
         .btn-primary {
-            background: var(--white);
-            color: var(--primary-color);
+            background: var(--accent-color);
+            color: var(--white);
             padding: 15px 30px;
             border-radius: 50px;
             text-decoration: none;
@@ -180,6 +184,8 @@
         }
 
         .btn-primary:hover {
+            background: #43e97b;
+            color: var(--primary-color);
             transform: translateY(-3px);
             box-shadow: var(--shadow-strong);
         }
@@ -214,8 +220,10 @@
 
         /* 特徴セクション */
         .features {
-            padding: 100px 0;
+            padding: 120px 0 100px 0;
             background: var(--white);
+            clip-path: polygon(0 60px, 100% 0, 100% 100%, 0 100%);
+            margin-top: -60px;
         }
 
         .container {
@@ -625,14 +633,13 @@
 
     <!-- ヒーローセクション -->
     <section id="home" class="hero">
+        <video class="hero-bg-video" src="https://www.w3schools.com/howto/rain.mp4" autoplay loop muted playsinline></video>
         <div class="hero-content">
             <div class="hero-text">
                 <h1>インソール外来<br>のご案内</h1>
-                <p>最新の3Dスキャン技術と熟練した技術者によるオーダーメイドインソールで、あなたの足の悩みを解決します。</p>
+                <p>未来の足元を、今ここから。<br>3Dスキャン×オーダーメイドで、あなたの歩行を革新します。</p>
                 <div class="cta-buttons">
-                    <a href="#contact" class="btn-primary">
-                        <i class="fab fa-line"></i> LINEで予約
-                    </a>
+                    <a href="#contact" class="btn-primary"><i class="fab fa-line"></i> LINEで予約</a>
                     <a href="#features" class="btn-secondary">詳しく見る</a>
                 </div>
             </div>
@@ -640,6 +647,7 @@
                 <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="インソール治療">
             </div>
         </div>
+        <svg class="hero-svg" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,60 C360,120 1080,0 1440,60 L1440,120 L0,120 Z" fill="#fff"/></svg>
     </section>
 
     <!-- 特徴セクション -->
