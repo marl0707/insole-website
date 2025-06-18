@@ -236,7 +236,15 @@
             top: 0; left: 0; width: 100vw; height: 100vh;
             object-fit: cover;
             z-index: 0;
-            filter: brightness(0.7) blur(1px);
+            filter: brightness(0.6) contrast(1.2) saturate(1.1);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(15,32,39,0.8) 0%, rgba(44,83,100,0.6) 50%, rgba(0,201,167,0.4) 100%);
+            z-index: 1;
         }
 
         .hero-svg {
@@ -258,13 +266,37 @@
         }
 
         .hero-text h1 {
-            font-size: 4rem;
+            font-size: 4.5rem;
             font-weight: 900;
             color: var(--white);
             margin-bottom: 1.5rem;
-            line-height: 1.2;
-            text-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            line-height: 1.1;
+            text-shadow: 0 8px 32px rgba(0,0,0,0.5);
             animation: slideInLeft 1s ease-out;
+            background: linear-gradient(45deg, #fff, #43e97b, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #43e97b;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .hero-location {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            display: inline-block;
         }
 
         .hero-text p {
@@ -281,21 +313,37 @@
         }
 
         .btn-primary {
-            background: var(--accent-color);
+            background: linear-gradient(135deg, #00c9a7 0%, #43e97b 50%, #00c9a7 100%);
             color: var(--white);
-            padding: 15px 30px;
+            padding: 18px 35px;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-soft);
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,201,167,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
         }
 
         .btn-primary:hover {
-            background: #43e97b;
-            color: var(--primary-color);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-strong);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(0,201,167,0.6);
         }
 
         .btn-secondary {
@@ -322,8 +370,15 @@
         .hero-visual img {
             width: 100%;
             height: auto;
-            border-radius: 20px;
-            box-shadow: var(--shadow-strong);
+            border-radius: 25px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+            transition: all 0.5s ease;
+            filter: brightness(1.1) contrast(1.05);
+        }
+
+        .hero-visual:hover img {
+            transform: scale(1.02) rotate(1deg);
+            box-shadow: 0 35px 100px rgba(0,201,167,0.3);
         }
 
         /* 特徴セクション */
@@ -359,13 +414,14 @@
 
         .feature-card {
             background: var(--white);
-            padding: 3rem 2rem;
-            border-radius: 20px;
-            box-shadow: var(--shadow-soft);
+            padding: 3.5rem 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.08);
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(0,201,167,0.1);
         }
 
         .feature-card::before {
@@ -374,26 +430,33 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: var(--gradient-primary);
+            height: 5px;
+            background: linear-gradient(90deg, #00c9a7, #43e97b, #00c9a7);
         }
 
         .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-strong);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 80px rgba(0,201,167,0.15);
         }
 
         .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient-primary);
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #00c9a7 0%, #43e97b 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 2rem;
+            margin: 0 auto 2.5rem;
             color: var(--white);
-            font-size: 2rem;
+            font-size: 2.2rem;
+            box-shadow: 0 10px 30px rgba(0,201,167,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(0,201,167,0.4);
         }
 
         .feature-card h3 {
@@ -993,6 +1056,14 @@
         .structured-data {
             display: none;
         }
+
+        /* セクション間の美しい区切り */
+        .section-divider {
+            height: 100px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 70%);
+            margin-top: -50px;
+        }
     </style>
 </head>
 <body>
@@ -1048,11 +1119,11 @@
 
     <!-- ヒーローセクション -->
     <section id="home" class="hero">
-        <video class="hero-bg-video" src="https://www.w3schools.com/howto/rain.mp4" autoplay loop muted playsinline></video>
+        <video class="hero-bg-video" src="https://player.vimeo.com/external/434045526.sd.mp4?s=c27eecc69a27dbc4ff2b87d38afc35f1a9e7c02d&profile_id=164&oauth2_token_id=57447761" autoplay loop muted playsinline></video>
         <div class="hero-content">
             <div class="hero-text">
-                <div style="font-size:1.2rem; font-weight:600; margin-bottom:0.5rem;">天下茶屋駅から徒歩1分</div>
-                <div style="font-size:2rem; font-weight:700; color:#43e97b; margin-bottom:0.5rem;">子供の夢を、足元から支える</div>
+                <div class="hero-location">天下茶屋駅から徒歩1分</div>
+                <div class="hero-subtitle">子供の夢を、足元から支える</div>
                 <h1>インソール外来<br>のご案内</h1>
                 <p>コンクリートに囲まれた現代社会で、子どもたちの足に異変が起きています。<br>硬いアスファルトの上を歩き、平らな床ばかりで生活する今の子どもたちは、土や草の上で遊ぶ機会が激減しました。その結果、足の筋力が低下し、扁平足や外反母趾、巻き爪などのトラブルを抱える子どもが急増しています。</p>
                 <div class="cta-buttons">
@@ -1060,11 +1131,14 @@
                 </div>
             </div>
             <div class="hero-visual">
-                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="インソール治療">
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="子どもの足とインソール治療">
             </div>
         </div>
         <svg class="hero-svg" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,60 C360,120 1080,0 1440,60 L1440,120 L0,120 Z" fill="#fff"/></svg>
     </section>
+
+    <!-- セクション区切り -->
+    <div class="section-divider"></div>
 
     <!-- 特徴セクション -->
     <section id="features" class="features">
@@ -1077,6 +1151,10 @@
                     </div>
                     <h3>現代社会で増える足のトラブル</h3>
                     <p>足は「第二の心臓」と呼ばれ、全身のバランスを支える重要な土台です。<br>足のアーチが崩れると、姿勢が悪くなり、膝や腰、肩への負担が増大。スポーツでのケガにもつながります。</p>
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 15px; text-align: left;">
+                        <h4 style="color: #00c9a7; margin-bottom: 1rem;">📊 調査結果</h4>
+                        <p style="font-size: 0.95rem; color: #666;">小学生の40％以上に足部変形が見られ、これは姿勢の悪化や運動能力の低下、転倒リスクにつながります。</p>
+                    </div>
                 </div>
                 <div class="feature-card scroll-animate">
                     <div class="feature-icon">
@@ -1084,6 +1162,14 @@
                     </div>
                     <h3>オーダーメイドインソールの意義</h3>
                     <p>一人ひとりの足の形状に合わせて作製されるインソールは、足本来の機能を取り戻し、正しい姿勢へと導きます。<br>ケガをしない体づくりは、足元から始まります。</p>
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 15px; text-align: left;">
+                        <h4 style="color: #00c9a7; margin-bottom: 1rem;">✨ 期待される効果</h4>
+                        <ul style="font-size: 0.95rem; color: #666; list-style: none; padding: 0;">
+                            <li>✓ 変形の矯正</li>
+                            <li>✓ 正しい足のポジション形成</li>
+                            <li>✓ アーチ構造の形成による力の分散</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1156,19 +1242,31 @@
             <h2 class="section-title scroll-animate">以下に当てはまる方は一度インソール外来をご検討下さい</h2>
             <div class="case-grid">
                 <div class="case-card scroll-animate">
-                    <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="子どもの足" class="case-image">
+                    <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="子どもの足" class="case-image">
                     <h3>子どもの足の変形</h3>
                     <p>成長期の子どもの足は軟骨が多く柔らかいため変形しやすく、狭い靴の着用やスポーツによる過度な負担でリスクが増加します。<br>調査では小学生の40％以上に足部変形が見られ、これは姿勢の悪化や運動能力の低下、転倒リスクにつながります。適切な足装具により、変形の矯正、正しい足のポジション形成、アーチ構造の形成による力の分散などの効果が期待できます。</p>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px; border-left: 4px solid #43e97b;">
+                        <h4 style="color: #43e97b; margin-bottom: 0.5rem; font-size: 1rem;">🔍 早期発見の重要性</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.9;">成長期の足の変形は、適切な時期に処置することで大幅に改善される可能性があります。</p>
+                    </div>
                 </div>
                 <div class="case-card scroll-animate">
-                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="歩行" class="case-image">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="歩行" class="case-image">
                     <h3>歩くと転びやすい・疲れやすい</h3>
                     <p>筋力が低下してくると正しい姿勢を保持できず、骨格のバランスが崩れてしまい、転倒やつまずきを起こすリスクが上昇し、疲れやすくなってしまいます。<br>適した足底装具を使用することで地面との設置面積が増えるとバランスをとりやすくなり、転倒やつまずきのリスクを抑えることができます。</p>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px; border-left: 4px solid #43e97b;">
+                        <h4 style="color: #43e97b; margin-bottom: 0.5rem; font-size: 1rem;">⚡ 改善効果</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.9;">適切なインソールにより、歩行時の安定性が向上し、疲労感が軽減されます。</p>
+                    </div>
                 </div>
                 <div class="case-card scroll-animate">
-                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="足の痛み" class="case-image">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="足の痛み" class="case-image">
                     <h3>足が痛い・変形のある方</h3>
                     <p>足の痛み、変形などがある場合、特定の場所にかかる過度な負担を軽減する除圧などで根本的な原因にアプローチした治療が有効です。</p>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px; border-left: 4px solid #43e97b;">
+                        <h4 style="color: #43e97b; margin-bottom: 0.5rem; font-size: 1rem;">🎯 根本的アプローチ</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.9;">痛みの原因となる負荷を分散し、足本来の機能を回復させることで根本的な改善を目指します。</p>
+                    </div>
                 </div>
             </div>
         </div>
