@@ -828,29 +828,111 @@
 
         /* 症例セクション */
         .cases {
-            padding: 100px 0;
+            padding: 120px 0;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: var(--white);
+            position: relative;
+        }
+
+        .cases::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .cases .container {
+            position: relative;
+            z-index: 2;
         }
 
         .cases .section-title {
             color: var(--white);
             -webkit-text-fill-color: var(--white);
+            margin-bottom: 1rem;
         }
 
         .case-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
             margin-top: 3rem;
         }
 
-        .case-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
+        /* 症状アイコンのスタイル */
+        .symptom-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #43e97b 0%, #00c9a7 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            color: var(--white);
+            font-size: 2rem;
+            box-shadow: 0 10px 30px rgba(67,233,123,0.4);
+            transition: all 0.3s ease;
+        }
+
+        .zoom-card:hover .symptom-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(67,233,123,0.6);
+        }
+
+        /* 症状詳細のスタイル */
+        .symptom-details {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.1);
             border-radius: 15px;
-            margin-bottom: 1.5rem;
+            border-left: 4px solid #43e97b;
+            text-align: left;
+        }
+
+        .symptom-details h4 {
+            color: #43e97b;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .symptom-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .symptom-details li {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.9);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .symptom-details li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #43e97b;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .flip-card {
+                height: 350px;
+            }
+            
+            .flip-card-front, .flip-card-back {
+                padding: 1.5rem;
+            }
         }
 
         /* フッター */
@@ -1010,7 +1092,7 @@
                 padding: 2rem 1.5rem;
             }
 
-            .glow-icon, .slide-icon, .zoom-icon {
+            .glow-icon, .slide-icon, .zoom-icon, .symptom-icon {
                 width: 70px;
                 height: 70px;
                 font-size: 1.8rem;
@@ -1308,225 +1390,6 @@
             clip-path: polygon(0 0, 100% 0, 100% 100%, 0 70%);
             margin-top: -50px;
         }
-
-        /* 3Dフリップ効果 */
-        .flip-card {
-            background-color: transparent;
-            width: 100%;
-            height: 400px;
-            perspective: 1000px;
-            margin-bottom: 2rem;
-        }
-
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.8s;
-            transform-style: preserve-3d;
-        }
-
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 25px;
-            overflow: hidden;
-        }
-
-        .flip-card-front {
-            background: var(--white);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.08);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-        }
-
-        .flip-card-back {
-            background: linear-gradient(135deg, #00c9a7 0%, #43e97b 100%);
-            color: var(--white);
-            transform: rotateY(180deg);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            box-shadow: 0 15px 50px rgba(0,201,167,0.3);
-        }
-
-        .flip-card-back h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--white);
-        }
-
-        .flip-card-back p {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            opacity: 0.95;
-        }
-
-        .flip-card-back ul {
-            list-style: none;
-            padding: 0;
-            margin: 1rem 0;
-        }
-
-        .flip-card-back li {
-            padding: 0.3rem 0;
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-
-        .flip-card-back li::before {
-            content: '✓';
-            color: var(--white);
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        .flip-card-back .cta-btn {
-            background: rgba(255,255,255,0.2);
-            color: var(--white);
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255,255,255,0.3);
-        }
-
-        .flip-card-back .cta-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-        }
-
-        /* 特徴セクションの3Dフリップ対応 */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-        }
-
-        /* 対象となる方セクションの3Dフリップ対応 */
-        .case-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 3rem;
-        }
-
-        /* 料金・保険・助成セクションの3Dフリップ対応 */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        /* 治療フローセクションの3Dフリップ対応 */
-        .flow-steps {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* 特徴アイコンのスタイル */
-        .feature-icon {
-            width: 90px;
-            height: 90px;
-            background: linear-gradient(135deg, #00c9a7 0%, #43e97b 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 2rem;
-            color: var(--white);
-            font-size: 2.2rem;
-            box-shadow: 0 10px 30px rgba(0,201,167,0.3);
-            transition: all 0.3s ease;
-        }
-
-        .flip-card:hover .feature-icon {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 15px 40px rgba(0,201,167,0.4);
-        }
-
-        /* ステップ番号のスタイル */
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-primary);
-            color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        /* 症例画像のスタイル */
-        .case-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: 1.5rem;
-        }
-
-        /* 料金表示のスタイル */
-        .price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
-
-        .price-label {
-            font-size: 1rem;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
-
-        .disease-list {
-            list-style: none;
-            margin: 1rem 0;
-        }
-
-        .disease-list li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-
-        .disease-list li:last-child {
-            border-bottom: none;
-        }
-
-        /* レスポンシブ対応 */
-        @media (max-width: 768px) {
-            .flip-card {
-                height: 350px;
-            }
-            
-            .flip-card-front, .flip-card-back {
-                padding: 1.5rem;
-            }
-        }
     </style>
 </head>
 <body>
@@ -1759,37 +1622,68 @@
     <!-- 対象となる方セクション -->
     <section id="cases" class="cases">
         <div class="container">
-            <h2 class="section-title scroll-animate">以下に当てはまる方は一度インソール外来をご検討下さい</h2>
+            <h2 class="section-title scroll-animate">こんなお悩みありませんか？</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; color: rgba(255,255,255,0.9);">お子様の足の健康を守るために、以下の症状が気になる方はお気軽にご相談ください</p>
             <div class="case-grid">
                 <div class="zoom-card scroll-animate">
                     <div class="zoom-bg"></div>
-                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="子どもの足" class="case-image">
-                    <h3>子どもの足の変形</h3>
-                    <p>成長期の子どもの足は軟骨が多く柔らかいため変形しやすく、狭い靴の着用やスポーツによる過度な負担でリスクが増加します。</p>
-                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px; border-left: 4px solid #43e97b;">
-                        <h4 style="color: #43e97b; margin-bottom: 0.5rem; font-size: 1rem;">🔍 早期発見の重要性</h4>
-                        <p style="font-size: 0.9rem; opacity: 0.9;">成長期の足の変形は、適切な時期に処置することで大幅に改善される可能性があります。</p>
+                    <div class="symptom-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>お子様の足の変形が気になる</h3>
+                    <p>扁平足、外反母趾、内反小趾など、お子様の足の変形が気になりませんか？成長期の足は柔らかく変形しやすいため、早期の対応が重要です。</p>
+                    <div class="symptom-details">
+                        <h4>🔍 こんな症状ありませんか？</h4>
+                        <ul>
+                            <li>土踏まずが平ら</li>
+                            <li>親指が内側に曲がっている</li>
+                            <li>小指が外側に曲がっている</li>
+                            <li>足の裏にタコができやすい</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="zoom-card scroll-animate">
                     <div class="zoom-bg"></div>
-                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="歩行" class="case-image">
-                    <h3>歩くと転びやすい・疲れやすい</h3>
-                    <p>筋力が低下してくると正しい姿勢を保持できず、骨格のバランスが崩れてしまい、転倒やつまずきを起こすリスクが上昇し、疲れやすくなってしまいます。<br>適した足底装具を使用することで地面との設置面積が増えるとバランスをとりやすくなり、転倒やつまずきのリスクを抑えることができます。</p>
-                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px; border-left: 4px solid #43e97b;">
-                        <h4 style="color: #43e97b; margin-bottom: 0.5rem; font-size: 1rem;">⚡ 改善効果</h4>
-                        <p style="font-size: 0.9rem; opacity: 0.9;">適切なインソールにより、歩行時の安定性が向上し、疲労感が軽減されます。</p>
+                    <div class="symptom-icon">
+                        <i class="fas fa-walking"></i>
+                    </div>
+                    <h3>歩行や運動で転びやすい</h3>
+                    <p>お子様がよく転んだり、歩くときに疲れやすそうにしていませんか？足のバランスが崩れていると、転倒リスクが高まります。</p>
+                    <div class="symptom-details">
+                        <h4>⚡ こんな症状ありませんか？</h4>
+                        <ul>
+                            <li>よく転ぶ、つまずく</li>
+                            <li>歩くときに疲れやすい</li>
+                            <li>運動が苦手</li>
+                            <li>姿勢が悪い</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="zoom-card scroll-animate">
                     <div class="zoom-bg"></div>
-                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="足の痛み" class="case-image">
-                    <h3>足が痛い・変形のある方</h3>
-                    <p>足の痛み、変形などがある場合、特定の場所にかかる過度な負担を軽減する除圧などで根本的な原因にアプローチした治療が有効です。</p>
-                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px; border-left: 4px solid #43e97b;">
-                        <h4 style="color: #43e97b; margin-bottom: 0.5rem; font-size: 1rem;">🎯 根本的アプローチ</h4>
-                        <p style="font-size: 0.9rem; opacity: 0.9;">痛みの原因となる負荷を分散し、足本来の機能を回復させることで根本的な改善を目指します。</p>
+                    <div class="symptom-icon">
+                        <i class="fas fa-heartbeat"></i>
                     </div>
+                    <h3>足の痛みや違和感がある</h3>
+                    <p>お子様が足の痛みを訴えたり、歩くのを嫌がったりしていませんか？足の痛みは、体の他の部分にも影響を与える可能性があります。</p>
+                    <div class="symptom-details">
+                        <h4>🎯 こんな症状ありませんか？</h4>
+                        <ul>
+                            <li>足の裏が痛い</li>
+                            <li>かかとが痛い</li>
+                            <li>足の指が痛い</li>
+                            <li>歩くときに違和感がある</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; backdrop-filter: blur(10px);">
+                    <h3 style="color: #43e97b; margin-bottom: 1rem;">💡 お気軽にご相談ください</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">お子様の足の健康は、将来の体づくりの基盤となります。<br>少しでも気になることがあれば、専門医にご相談ください。</p>
+                    <a href="#contact" class="btn-primary" style="display: inline-block; margin-top: 1rem;">
+                        <i class="fab fa-line"></i> 今すぐご相談・予約
+                    </a>
                 </div>
             </div>
         </div>
