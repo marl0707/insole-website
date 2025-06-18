@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ - 天王寺東整形外科クリニック</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2C3E50;
+            --accent-color: #E74C3C;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --text-dark: #2C3E50;
+            --text-light: #7F8C8D;
+            --white: #FFFFFF;
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-strong: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+
+        /* ヘッダー */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ヒーローセクション */
+        .hero {
+            min-height: 60vh;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* メインコンテンツ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* お問い合わせ方法 */
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .contact-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .contact-card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .contact-link {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* フォーム */
+        .form-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        /* フッター */
+        .footer {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .phone-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 1rem 0;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .form-container {
+                padding: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">天王寺東整形外科クリニック</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="treatment.html">治療内容</a></li>
+                <li><a href="cases.html">症例</a></li>
+                <li><a href="access.html">アクセス</a></li>
+                <li><a href="contact.html">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ヒーローセクション -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>お問い合わせ</h1>
+            <p>お気軽にご相談ください</p>
+        </div>
+    </section>
+
+    <!-- お問い合わせ方法 -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">お問い合わせ方法</h2>
+            <div class="contact-methods">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>お電話</h3>
+                    <p>06-6653-2883</p>
+                    <p>診療時間内にお電話ください</p>
+                    <a href="tel:06-6653-2883" class="contact-link">今すぐ電話</a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-line"></i>
+                    </div>
+                    <h3>LINE予約</h3>
+                    <p>24時間受付可能</p>
+                    <p>簡単に予約できます</p>
+                    <a href="#" class="contact-link">LINEで予約</a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>メール</h3>
+                    <p>info@example.com</p>
+                    <p>24時間受付可能</p>
+                    <a href="mailto:info@example.com" class="contact-link">メール送信</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- お問い合わせフォーム -->
+    <section class="section form-section">
+        <div class="container">
+            <h2 class="section-title">お問い合わせフォーム</h2>
+            <form class="form-container">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">お名前 *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="kana">フリガナ *</label>
+                        <input type="text" id="kana" name="kana" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">お電話番号 *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">メールアドレス</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="age">年齢</label>
+                    <select id="age" name="age">
+                        <option value="">選択してください</option>
+                        <option value="10-19">10代</option>
+                        <option value="20-29">20代</option>
+                        <option value="30-39">30代</option>
+                        <option value="40-49">40代</option>
+                        <option value="50-59">50代</option>
+                        <option value="60-69">60代</option>
+                        <option value="70+">70代以上</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="symptoms">主な症状 *</label>
+                    <select id="symptoms" name="symptoms" required>
+                        <option value="">選択してください</option>
+                        <option value="flat-foot">扁平足</option>
+                        <option value="high-arch">凹足</option>
+                        <option value="bunion">外反母趾</option>
+                        <option value="plantar-fasciitis">足底腱膜炎</option>
+                        <option value="morton">モートン病</option>
+                        <option value="callus">胼胝・鶏眼</option>
+                        <option value="other">その他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">お問い合わせ内容 *</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="症状の詳細やご質問をお聞かせください"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="preferred-contact">ご希望の連絡方法</label>
+                    <select id="preferred-contact" name="preferred-contact">
+                        <option value="">選択してください</option>
+                        <option value="phone">お電話</option>
+                        <option value="email">メール</option>
+                        <option value="line">LINE</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">送信する</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>天王寺東整形外科クリニック</h3>
+                    <p>〒000-0000<br>大阪市天王寺区○○町0-0-0</p>
+                    <div class="phone-number">06-6653-2883</div>
+                    <p>診療時間: 平日 9:00-18:00<br>土曜 9:00-13:00<br>休診日: 日曜・祝日</p>
+                </div>
+                <div class="footer-section">
+                    <h3>アクセス</h3>
+                    <p>天王寺駅から徒歩5分<br>地下鉄御堂筋線・谷町線<br>JR環状線・大和路線</p>
+                </div>
+                <div class="footer-section">
+                    <h3>お問い合わせ</h3>
+                    <p><a href="tel:06-6653-2883">📞 06-6653-2883</a></p>
+                    <p><a href="mailto:info@example.com">📧 info@example.com</a></p>
+                    <p><a href="#"><i class="fab fa-line"></i> LINEで予約</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 天王寺東整形外科クリニック. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // フォーム送信処理
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('お問い合わせありがとうございます。後日ご連絡いたします。');
+            this.reset();
+        });
+    </script>
+</body>
+</html> 

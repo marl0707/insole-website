@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>症例紹介 - 天王寺東整形外科クリニック</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2C3E50;
+            --accent-color: #E74C3C;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --text-dark: #2C3E50;
+            --text-light: #7F8C8D;
+            --white: #FFFFFF;
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-strong: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+
+        /* ヘッダー */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ヒーローセクション */
+        .hero {
+            min-height: 60vh;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* メインコンテンツ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 症例カード */
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+
+        .case-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+        }
+
+        .case-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .case-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .case-content {
+            padding: 2rem;
+        }
+
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .case-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .case-age {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .case-details {
+            margin: 1.5rem 0;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .detail-value {
+            color: var(--text-light);
+        }
+
+        .case-description {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .improvement {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: var(--white);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .improvement h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* 統計セクション */
+        .stats-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--white);
+        }
+
+        .stats-section .section-title {
+            color: var(--white);
+            -webkit-text-fill-color: var(--white);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* フッター */
+        .footer {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .phone-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 1rem 0;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">天王寺東整形外科クリニック</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="treatment.html">治療内容</a></li>
+                <li><a href="cases.html">症例</a></li>
+                <li><a href="access.html">アクセス</a></li>
+                <li><a href="contact.html">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ヒーローセクション -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>症例紹介</h1>
+            <p>実際の治療効果をご紹介します</p>
+        </div>
+    </section>
+
+    <!-- 症例紹介 -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">実際の症例</h2>
+            <div class="case-grid">
+                <div class="case-card">
+                    <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="症例1" class="case-image">
+                    <div class="case-content">
+                        <div class="case-header">
+                            <h3 class="case-title">外反母趾の改善</h3>
+                            <span class="case-age">30代女性</span>
+                        </div>
+                        <div class="case-details">
+                            <div class="detail-item">
+                                <span class="detail-label">主訴</span>
+                                <span class="detail-value">親指の痛み</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">治療期間</span>
+                                <span class="detail-value">3ヶ月</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">装着頻度</span>
+                                <span class="detail-value">毎日</span>
+                            </div>
+                        </div>
+                        <p class="case-description">
+                            ハイヒールをよく履く仕事をされており、親指の痛みで歩くのが困難になっていました。インソール装着後、痛みが軽減し、快適に歩けるようになりました。
+                        </p>
+                        <div class="improvement">
+                            <h4>改善効果</h4>
+                            <p>痛みの軽減率: 80%<br>歩行時の快適性: 大幅改善</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="症例2" class="case-image">
+                    <div class="case-content">
+                        <div class="case-header">
+                            <h3 class="case-title">扁平足の改善</h3>
+                            <span class="case-age">40代男性</span>
+                        </div>
+                        <div class="case-details">
+                            <div class="detail-item">
+                                <span class="detail-label">主訴</span>
+                                <span class="detail-value">足の疲労感</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">治療期間</span>
+                                <span class="detail-value">6ヶ月</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">装着頻度</span>
+                                <span class="detail-value">毎日</span>
+                            </div>
+                        </div>
+                        <p class="case-description">
+                            立ち仕事が多く、夕方になると足が疲れて歩けなくなる状態でした。インソール装着により、アーチが形成され、疲労感が大幅に軽減されました。
+                        </p>
+                        <div class="improvement">
+                            <h4>改善効果</h4>
+                            <p>疲労感の軽減: 70%<br>アーチ形成: 確認</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="症例3" class="case-image">
+                    <div class="case-content">
+                        <div class="case-header">
+                            <h3 class="case-title">足底腱膜炎の改善</h3>
+                            <span class="case-age">50代女性</span>
+                        </div>
+                        <div class="case-details">
+                            <div class="detail-item">
+                                <span class="detail-label">主訴</span>
+                                <span class="detail-value">かかとの痛み</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">治療期間</span>
+                                <span class="detail-value">4ヶ月</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">装着頻度</span>
+                                <span class="detail-value">毎日</span>
+                            </div>
+                        </div>
+                        <p class="case-description">
+                            朝の一歩目が特に痛く、日常生活に支障をきたしていました。インソールにより足底への負担が軽減され、痛みが改善されました。
+                        </p>
+                        <div class="improvement">
+                            <h4>改善効果</h4>
+                            <p>痛みの軽減: 90%<br>朝の痛み: ほぼ消失</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="症例4" class="case-image">
+                    <div class="case-content">
+                        <div class="case-header">
+                            <h3 class="case-title">スポーツ用インソール</h3>
+                            <span class="case-age">20代男性</span>
+                        </div>
+                        <div class="case-details">
+                            <div class="detail-item">
+                                <span class="detail-label">主訴</span>
+                                <span class="detail-value">ランニング時の痛み</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">治療期間</span>
+                                <span class="detail-value">2ヶ月</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">装着頻度</span>
+                                <span class="detail-value">運動時</span>
+                            </div>
+                        </div>
+                        <p class="case-description">
+                            マラソン愛好者で、長距離を走ると足の痛みが出ていました。スポーツ専用のインソールにより、パフォーマンスが向上し、痛みも軽減されました。
+                        </p>
+                        <div class="improvement">
+                            <h4>改善効果</h4>
+                            <p>痛みの軽減: 85%<br>パフォーマンス: 向上</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 統計 -->
+    <section class="section stats-section">
+        <div class="container">
+            <h2 class="section-title">治療実績</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">治療実績</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">満足度</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10年</div>
+                    <div class="stat-label">治療経験</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3D</div>
+                    <div class="stat-label">最新技術</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>天王寺東整形外科クリニック</h3>
+                    <p>〒000-0000<br>大阪市天王寺区○○町0-0-0</p>
+                    <div class="phone-number">06-6653-2883</div>
+                    <p>診療時間: 平日 9:00-18:00<br>土曜 9:00-13:00<br>休診日: 日曜・祝日</p>
+                </div>
+                <div class="footer-section">
+                    <h3>アクセス</h3>
+                    <p>天王寺駅から徒歩5分<br>地下鉄御堂筋線・谷町線<br>JR環状線・大和路線</p>
+                </div>
+                <div class="footer-section">
+                    <h3>お問い合わせ</h3>
+                    <p><a href="tel:06-6653-2883">📞 06-6653-2883</a></p>
+                    <p><a href="mailto:info@example.com">📧 info@example.com</a></p>
+                    <p><a href="#"><i class="fab fa-line"></i> LINEで予約</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 天王寺東整形外科クリニック. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
