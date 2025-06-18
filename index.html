@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>腸内フローラ - 健康な腸内環境をサポート</title>
+    <title>インソール外来のご案内 - 天王寺東整形外科クリニック</title>
     <style>
         * {
             margin: 0;
@@ -12,592 +12,289 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'メイリオ', sans-serif;
+            line-height: 1.7;
             color: #333;
-            background-color: #f8f9fa;
+            background-color: #fff;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
         /* Header */
         header {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: #fff;
+            padding: 20px 0;
         }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
+        .clinic-logo {
+            font-size: 1.2rem;
             font-weight: bold;
+            margin-bottom: 30px;
         }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-
-        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white;
-            padding: 120px 0 80px;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: #FF9800;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(255, 152, 0, 0.3);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
-        }
-
-        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 50px;
         }
 
-        .feature-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .line-button {
+            display: inline-block;
+            background: #00B900;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .hero-image {
             text-align: center;
-            transition: transform 0.3s;
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
         }
 
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        /* Introduction */
+        .intro {
+            margin: 50px 0;
+        }
+
+        .intro h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .info-box {
+            background: rgba(255, 241, 118, 0.3);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        /* Insurance Section */
+        .insurance {
+            margin: 50px 0;
+        }
+
+        .disease-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .disease-item {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Treatment Flow */
+        .treatment-flow {
+            margin: 50px 0;
+        }
+
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .flow-step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #4A90E2;
+            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1rem;
-            color: white;
-            font-size: 2rem;
+            margin: 0 auto 15px;
         }
 
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #333;
+        /* Cases Section */
+        .cases {
+            margin: 50px 0;
         }
 
-        .feature-card p {
-            color: #666;
-            line-height: 1.6;
+        .case-box {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
         }
 
-        /* Products Section */
-        .products {
-            padding: 80px 0;
-            background: #f8f9fa;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-image {
-            height: 250px;
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-        }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-info h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-
-        .product-info p {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #FF9800;
-            margin-bottom: 1rem;
-        }
-
-        .buy-button {
-            background: #FF9800;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-
-        .buy-button:hover {
-            background: #F57C00;
-        }
-
-        /* About Section */
-        .about {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: #333;
-        }
-
-        .about-text p {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 1rem;
-            line-height: 1.8;
-        }
-
-        .about-image {
-            height: 400px;
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 80px 0;
-            background: #f8f9fa;
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .form-group input,
-        .form-group textarea {
+        .case-image {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
+            height: 200px;
+            object-fit: cover;
             border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #4CAF50;
-        }
-
-        .submit-button {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1rem;
-            transition: transform 0.3s;
-        }
-
-        .submit-button:hover {
-            transform: translateY(-2px);
+            margin: 20px 0;
         }
 
         /* Footer */
         footer {
-            background: #333;
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
+            background: #f8f9fa;
+            padding: 50px 0;
+            margin-top: 50px;
         }
 
         .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            text-align: center;
         }
 
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            color: #FF9800;
+        .phone-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4A90E2;
+            margin: 20px 0;
         }
 
-        .footer-section p,
-        .footer-section a {
-            color: #ccc;
-            text-decoration: none;
-            line-height: 1.6;
-        }
-
-        .footer-section a:hover {
-            color: #FF9800;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid #555;
-            padding-top: 1rem;
-            color: #ccc;
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .about-content {
+            .hero {
                 grid-template-columns: 1fr;
             }
 
-            .features-grid,
-            .products-grid {
+            .flow-steps {
                 grid-template-columns: 1fr;
             }
 
-            .section-title {
+            .hero-content h1 {
                 font-size: 2rem;
             }
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease-out;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
-        <nav class="container">
-            <div class="logo">腸内フローラ</div>
-            <ul class="nav-links">
-                <li><a href="#home">ホーム</a></li>
-                <li><a href="#features">特徴</a></li>
-                <li><a href="#products">商品</a></li>
-                <li><a href="#about">会社概要</a></li>
-                <li><a href="#contact">お問い合わせ</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <div class="clinic-logo">天王寺東整形外科クリニック</div>
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>インソール外来<br>のご案内</h1>
+                    <a href="#" class="line-button">今すぐLINEで予約</a>
+                </div>
+                <div class="hero-image">
+                    <img src="https://placehold.jp/400x600.png" alt="スマートフォンイメージ">
+                </div>
+            </div>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <h1 class="fade-in-up">健康な腸内環境をサポート</h1>
-            <p class="fade-in-up">腸内フローラのバランスを整えて、毎日を健康に過ごしましょう</p>
-            <a href="#products" class="cta-button fade-in-up">商品を見る</a>
-        </div>
-    </section>
+    <main class="container">
+        <section class="intro">
+            <h2>ケガをしない体づくりは、<br>足元から始まります</h2>
+            <div class="info-box">
+                <p>インソールとは、靴の中敷きのことです。足の形や歩き方に合わせてオーダーメイドで作製することで、足の痛みや変形を改善し、ケガの予防にも効果があります。</p>
+                <p>当クリニックでは、3Dスキャナーを使用した最新の計測システムと、熟練した技術者による製作を組み合わせることで、一人一人に最適なインソールを提供しています。</p>
+            </div>
+        </section>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="container">
-            <h2 class="section-title">なぜ腸内フローラが重要なのか</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🦠</div>
-                    <h3>腸内細菌のバランス</h3>
-                    <p>善玉菌と悪玉菌のバランスを整え、健康的な腸内環境を維持します。</p>
+        <section class="insurance">
+            <h2>インソールの自己負担額</h2>
+            <div class="info-box">
+                <p>保険適用の場合、1足あたりの自己負担額は保険の種類により異なります。</p>
+                <ul>
+                    <li>健康保険3割負担の方：2,000円程度</li>
+                    <li>健康保険1割負担の方：700円程度</li>
+                </ul>
+            </div>
+
+            <h3>保険適応で製作可能な疾患</h3>
+            <div class="disease-grid">
+                <div class="disease-item">扁平足</div>
+                <div class="disease-item">凹足</div>
+                <div class="disease-item">外反母趾</div>
+                <div class="disease-item">足底腱膜炎</div>
+                <div class="disease-item">モートン病</div>
+                <div class="disease-item">胼胝・鶏眼<br>（タコ・ウオノメ）</div>
+            </div>
+        </section>
+
+        <section class="treatment-flow">
+            <h2>当院でのインソール治療の流れ</h2>
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <div class="step-number">1</div>
+                    <h3>診察</h3>
+                    <p>医師が足の状態を詳しく診察します。必要に応じてレントゲン撮影も行います。</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💪</div>
-                    <h3>免疫力の向上</h3>
-                    <p>腸内フローラの改善により、体の免疫力を自然に高めます。</p>
+                <div class="flow-step">
+                    <div class="step-number">2</div>
+                    <h3>計測</h3>
+                    <p>3Dスキャナーで足の形を正確に計測し、歩き方もチェックします。</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌿</div>
-                    <h3>自然由来成分</h3>
-                    <p>厳選された自然由来の成分を使用し、体に優しい設計です。</p>
+                <div class="flow-step">
+                    <div class="step-number">3</div>
+                    <h3>完成</h3>
+                    <p>約2週間後に完成したインソールを装着し、適合確認を行います。</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Products Section -->
-    <section id="products" class="products">
-        <div class="container">
-            <h2 class="section-title">商品ラインナップ</h2>
-            <div class="products-grid">
-                <div class="product-card">
-                    <div class="product-image">🦠</div>
-                    <div class="product-info">
-                        <h3>プロバイオティクスサプリ</h3>
-                        <p>乳酸菌やビフィズス菌を配合した腸内環境改善サプリメント。</p>
-                        <div class="price">¥3,980</div>
-                        <button class="buy-button">購入する</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-image">🥗</div>
-                    <div class="product-info">
-                        <h3>プレバイオティクス食品</h3>
-                        <p>善玉菌のエサとなる食物繊維を豊富に含む健康食品。</p>
-                        <div class="price">¥2,580</div>
-                        <button class="buy-button">購入する</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-image">💊</div>
-                    <div class="product-info">
-                        <h3>腸内フローラ検査キット</h3>
-                        <p>自宅で簡単に腸内環境をチェックできる検査キット。</p>
-                        <div class="price">¥5,980</div>
-                        <button class="buy-button">購入する</button>
-                    </div>
-                </div>
+        <section class="cases">
+            <h2>以下に当てはまる方はインソール外来をご検討ください</h2>
+            
+            <div class="case-box">
+                <h3>お子様の足の変形が気になる方</h3>
+                <img src="https://placehold.jp/800x400.png" alt="子どもの足" class="case-image">
+                <p>成長期のお子様は、適切な処置を行うことで足の形が改善される可能性が高くなります。早期発見・早期治療が重要です。</p>
             </div>
-        </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>私たちについて</h2>
-                    <p>私たちは、腸内フローラの研究と健康増進に取り組む専門チームです。</p>
-                    <p>最新の研究結果に基づき、腸内環境の改善を通じて皆様の健康をサポートします。</p>
-                    <p>厳格な品質管理と科学的根拠に基づいた製品開発により、安心してご利用いただけます。</p>
-                </div>
-                <div class="about-image">
-                    🏥
-                </div>
+            <div class="case-box">
+                <h3>歩くと転びやすい・疲れやすい方</h3>
+                <img src="https://placehold.jp/800x400.png" alt="歩行イメージ" class="case-image">
+                <p>足の形や歩き方の癖により、バランスを崩しやすかったり、すぐに疲れてしまう場合があります。インソールで足の形を整えることで改善が期待できます。</p>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">お問い合わせ</h2>
-            <form class="contact-form">
-                <div class="form-group">
-                    <label for="name">お名前</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">メールアドレス</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">メッセージ</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="submit-button">送信する</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <h3>腸内フローラ</h3>
-                    <p>腸内環境の改善を通じて健康をサポートする専門メーカーです。</p>
+                <h2>天王寺東整形外科クリニック</h2>
+                <p>〒000-0000 大阪市天王寺区○○町0-0-0</p>
+                <div class="phone-number">
+                    TEL: 06-6653-2883
                 </div>
-                <div class="footer-section">
-                    <h3>お問い合わせ</h3>
-                    <p>📧 info@intestinal-flora.com</p>
-                    <p>📞 03-1234-5678</p>
-                </div>
-                <div class="footer-section">
-                    <h3>営業時間</h3>
-                    <p>平日: 9:00-18:00</p>
-                    <p>土日祝: 10:00-17:00</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 腸内フローラ. All rights reserved.</p>
+                <p>診療時間: 平日 9:00-18:00 / 土曜 9:00-13:00<br>
+                休診日: 日曜・祝日</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add fade-in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-up');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all sections
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-
-        // Form submission handling
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('お問い合わせありがとうございます。後日ご連絡いたします。');
-            this.reset();
-        });
-
-        // Buy button handling
-        document.querySelectorAll('.buy-button').forEach(button => {
-            button.addEventListener('click', function() {
-                alert('商品をカートに追加しました。');
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
     </script>
