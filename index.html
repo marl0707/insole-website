@@ -17,16 +17,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #0f2027;
-            --secondary-color: #2c5364;
-            --accent-color: #00c9a7;
-            --gradient-primary: linear-gradient(135deg, #0f2027 0%, #2c5364 50%, #00c9a7 100%);
-            --gradient-accent: linear-gradient(135deg, #00c9a7 0%, #43e97b 100%);
-            --text-dark: #0f2027;
-            --text-light: #7F8C8D;
+            --primary-color: #2d2d2d;
+            --secondary-color: #ffc107;
+            --accent-color: #ff9800;
+            --yellow-light: #fff9e6;
+            --yellow-medium: #ffeb3b;
+            --yellow-dark: #f9a825;
+            --gradient-primary: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+            --gradient-accent: linear-gradient(135deg, #ffeb3b 0%, #ffc107 100%);
+            --text-dark: #212121;
+            --text-light: #616161;
             --white: #FFFFFF;
-            --shadow-soft: 0 10px 30px rgba(0,0,0,0.1);
-            --shadow-strong: 0 20px 60px rgba(0,0,0,0.15);
+            --bg-light: #fffef7;
+            --shadow-soft: 0 15px 50px rgba(0,0,0,0.08);
+            --shadow-strong: 0 25px 80px rgba(0,0,0,0.15);
         }
 
         * {
@@ -39,8 +43,9 @@
             font-family: 'Noto Sans JP', sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
-            background: var(--white);
+            background: var(--bg-light);
             overflow-x: hidden;
+            position: relative;
         }
 
         /* カスタムスクロールバー */
@@ -56,22 +61,44 @@
             background: var(--gradient-primary);
             border-radius: 4px;
         }
+        
+        /* Ensure all interactive elements have visible focus states */
+        *:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+        
+        /* Improve link underlines globally */
+        a {
+            text-underline-offset: 2px;
+        }
+        
+        /* Ensure buttons don't lose focus outline */
+        button:focus-visible,
+        a:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
 
         /* ヘッダー */
         .header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(15,32,39,0.95);
+            background: rgba(255,255,255,0.95);
             backdrop-filter: blur(20px);
             z-index: 1000;
             transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 2px solid var(--secondary-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         .header.scrolled {
-            background: rgba(15,32,39,0.98);
-            box-shadow: var(--shadow-soft);
+            background: rgba(255,255,255,0.98);
+            box-shadow: 0 4px 20px rgba(255,193,7,0.2);
         }
 
         .nav-container {
@@ -87,10 +114,8 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--text-dark);
+            text-shadow: 2px 2px 4px rgba(255,193,7,0.3);
         }
 
         .nav-menu {
@@ -101,10 +126,19 @@
 
         .nav-menu a {
             text-decoration: none;
-            color: var(--white);
-            font-weight: 500;
+            color: var(--text-dark);
+            font-weight: 600;
             position: relative;
             transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+        /* Focus state for navigation links */
+        .nav-menu a:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+            background: rgba(255,193,7,0.1);
         }
 
         .nav-menu a::after {
@@ -116,6 +150,10 @@
             height: 2px;
             background: var(--gradient-accent);
             transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-color);
         }
 
         .nav-menu a:hover::after {
@@ -181,7 +219,7 @@
             height: 60px;
             border-radius: 50%;
             background: var(--gradient-accent);
-            color: var(--white);
+            color: #000000; /* Black icons for better contrast */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -189,12 +227,27 @@
             font-size: 1.5rem;
             box-shadow: var(--shadow-strong);
             transition: all 0.3s ease;
-            animation: pulse 2s infinite;
+            animation: pulse 2s ease-in-out infinite;
+            border: 2px solid transparent;
+        }
+        
+        /* Focus state for floating buttons */
+        .floating-btn:focus {
+            outline: 3px solid #000000;
+            outline-offset: 2px;
+            border-color: #000000;
         }
 
         .floating-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(0,201,167,0.4);
+            transform: scale(1.15);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            background: linear-gradient(135deg, #ffeb3b 0%, #f9a825 100%);
+            color: #000000;
+        }
+        
+        /* Active state */
+        .floating-btn:active {
+            transform: scale(1.05);
         }
 
         @keyframes pulse {
@@ -226,30 +279,31 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, var(--yellow-light) 0%, var(--white) 50%, rgba(255,235,59,0.3) 100%);
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
 
         .hero-bg-video {
             position: absolute;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover;
             z-index: 0;
-            filter: brightness(0.6) contrast(1.2) saturate(1.1);
+            filter: brightness(0.8) contrast(1.1) saturate(0.9) sepia(0.3);
         }
 
         .hero::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(15,32,39,0.8) 0%, rgba(44,83,100,0.6) 50%, rgba(0,201,167,0.4) 100%);
+            background: linear-gradient(135deg, rgba(255,193,7,0.1) 0%, rgba(255,152,0,0.1) 50%, rgba(255,235,59,0.1) 100%);
             z-index: 1;
         }
 
         .hero-svg {
             position: absolute;
-            bottom: 0; left: 0; width: 100vw; height: 120px;
+            bottom: 0; left: 0; width: 100%; height: 120px;
             z-index: 2;
         }
 
@@ -268,62 +322,69 @@
         .hero-text h1 {
             font-size: 4.5rem;
             font-weight: 900;
-            color: var(--white);
+            color: var(--text-dark);
             margin-bottom: 1.5rem;
             line-height: 1.1;
-            text-shadow: 0 8px 32px rgba(0,0,0,0.5);
-            animation: slideInLeft 1s ease-out;
-            background: linear-gradient(45deg, #fff, #43e97b, #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            text-shadow: 3px 3px 6px rgba(255,193,7,0.3);
+            animation: slideInLeft 0.8s ease-out;
         }
 
         .hero-subtitle {
             font-size: 1.4rem;
             font-weight: 600;
-            color: #43e97b;
+            color: var(--accent-color);
             margin-bottom: 0.5rem;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(255,152,0,0.2);
         }
 
         .hero-location {
             font-size: 1.1rem;
             font-weight: 500;
-            color: rgba(255,255,255,0.9);
+            color: var(--text-dark);
             margin-bottom: 1rem;
             padding: 0.5rem 1rem;
-            background: rgba(255,255,255,0.1);
-            border-radius: 25px;
+            background: rgba(255,235,59,0.2);
+            border-radius: 20px;
             backdrop-filter: blur(10px);
             display: inline-block;
+            border: 2px solid var(--yellow-medium);
         }
 
         .hero-text p {
             font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--text-dark);
             margin-bottom: 2rem;
-            animation: slideInLeft 1s ease-out 0.2s both;
+            animation: slideInLeft 0.8s ease-out 0.2s both;
+            font-weight: 500;
         }
 
         .cta-buttons {
             display: flex;
             gap: 1rem;
-            animation: slideInLeft 1s ease-out 0.4s both;
+            animation: slideInLeft 0.8s ease-out 0.4s both;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #00c9a7 0%, #43e97b 50%, #00c9a7 100%);
-            color: var(--white);
+            background: var(--gradient-primary);
+            color: #000000; /* Black text for better contrast on yellow gradient */
             padding: 18px 35px;
-            border-radius: 50px;
+            border-radius: 30px;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 1.1rem;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(0,201,167,0.4);
             position: relative;
             overflow: hidden;
+            border: 2px solid transparent;
+            display: inline-block;
+        }
+        
+        /* Focus state for accessibility */
+        .btn-primary:focus {
+            outline: 3px solid #000000;
+            outline-offset: 2px;
+            border-color: #000000;
         }
 
         .btn-primary::before {
@@ -334,7 +395,7 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
+            transition: left 0.3s ease;
         }
 
         .btn-primary:hover::before {
@@ -344,55 +405,81 @@
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 20px 50px rgba(0,201,167,0.6);
+            background: linear-gradient(135deg, #ffeb3b 0%, #f9a825 100%);
+            color: #000000;
+        }
+        
+        /* Active state */
+        .btn-primary:active {
+            transform: translateY(-1px) scale(1.02);
         }
 
         .btn-secondary {
-            background: transparent;
-            color: var(--white);
+            background: var(--white);
+            color: var(--text-dark);
             padding: 15px 30px;
-            border: 2px solid var(--white);
-            border-radius: 50px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        /* Focus state for accessibility */
+        .btn-secondary:focus {
+            outline: 3px solid var(--secondary-color);
+            outline-offset: 2px;
         }
 
         .btn-secondary:hover {
-            background: var(--white);
-            color: var(--primary-color);
+            background: var(--secondary-color);
+            color: #000000; /* Black text for better contrast */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,193,7,0.3);
+        }
+        
+        /* Active state */
+        .btn-secondary:active {
+            transform: translateY(0);
         }
 
         .hero-visual {
             position: relative;
-            animation: slideInRight 1s ease-out 0.6s both;
+            animation: slideInRight 0.8s ease-out 0.6s both;
         }
 
         .hero-visual img {
             width: 100%;
             height: auto;
-            border-radius: 25px;
+            max-width: 100%;
+            border-radius: 20px;
             box-shadow: 0 25px 80px rgba(0,0,0,0.3);
-            transition: all 0.5s ease;
+            transition: all 0.3s ease;
             filter: brightness(1.1) contrast(1.05);
+            display: block;
         }
 
         .hero-visual:hover img {
-            transform: scale(1.02) rotate(1deg);
+            transform: scale(1.01);
             box-shadow: 0 35px 100px rgba(0,201,167,0.3);
         }
 
         /* 特徴セクション */
         .features {
-            padding: 120px 0 100px 0;
+            padding: 120px 0;
             background: var(--white);
             clip-path: polygon(0 60px, 100% 0, 100% 100%, 0 100%);
             margin-top: -60px;
+            position: relative;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .section-title {
@@ -400,15 +487,13 @@
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 3rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--text-dark);
+            text-shadow: 2px 2px 4px rgba(255,193,7,0.2);
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 3rem;
         }
 
@@ -425,7 +510,7 @@
             width: 100%;
             height: 100%;
             text-align: center;
-            transition: transform 0.8s;
+            transition: transform 0.6s ease;
             transform-style: preserve-3d;
         }
 
@@ -439,7 +524,7 @@
             height: 100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            border-radius: 25px;
+            border-radius: 20px;
             overflow: hidden;
         }
 
@@ -499,33 +584,42 @@
         }
 
         .flip-card-back .cta-btn {
-            background: rgba(255,255,255,0.2);
-            color: var(--white);
+            background: rgba(255,255,255,0.9);
+            color: #000000; /* Black text for better contrast */
             padding: 0.8rem 1.5rem;
-            border-radius: 25px;
+            border-radius: 20px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             margin-top: 1rem;
             transition: all 0.3s ease;
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 2px solid rgba(255,255,255,1);
+            display: inline-block;
+        }
+        
+        /* Focus state */
+        .flip-card-back .cta-btn:focus {
+            outline: 3px solid #ffffff;
+            outline-offset: 2px;
         }
 
         .flip-card-back .cta-btn:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,1);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            color: var(--secondary-color);
         }
 
         /* 光るカード効果 */
         .glow-card {
             background: var(--white);
-            padding: 3.5rem 2.5rem;
-            border-radius: 25px;
+            padding: 3rem 2rem;
+            border-radius: 20px;
             box-shadow: 0 15px 50px rgba(0,0,0,0.08);
             text-align: center;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(0,201,167,0.1);
+            border: 2px solid rgba(255,193,7,0.2);
         }
 
         .glow-card::before {
@@ -536,7 +630,7 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(0,201,167,0.1), transparent);
-            transition: left 0.6s ease;
+            transition: left 0.3s ease;
         }
 
         .glow-card:hover::before {
@@ -544,30 +638,30 @@
         }
 
         .glow-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 80px rgba(0,201,167,0.2);
-            border-color: rgba(0,201,167,0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.15);
+            border-color: var(--secondary-color);
         }
 
         .glow-card .glow-icon {
             width: 90px;
             height: 90px;
-            background: linear-gradient(135deg, #00c9a7 0%, #43e97b 100%);
+            background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 2.5rem;
-            color: var(--white);
+            color: #000000; /* Black icon for better contrast on yellow gradient */
             font-size: 2.2rem;
-            box-shadow: 0 10px 30px rgba(0,201,167,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             position: relative;
         }
 
         .glow-card:hover .glow-icon {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 15px 40px rgba(0,201,167,0.4);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
         }
 
         .glow-card:hover .glow-icon::after {
@@ -577,25 +671,38 @@
             left: -10px;
             right: -10px;
             bottom: -10px;
-            background: linear-gradient(45deg, #00c9a7, #43e97b, #00c9a7);
+            background: linear-gradient(45deg, var(--secondary-color), var(--yellow-medium), var(--secondary-color));
             border-radius: 50%;
             z-index: -1;
-            animation: glowPulse 2s infinite;
+            animation: glowPulse 2s ease-in-out infinite;
         }
 
         @keyframes glowPulse {
             0%, 100% { opacity: 0.3; transform: scale(1); }
             50% { opacity: 0.6; transform: scale(1.1); }
         }
+        
+        .glow-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+        
+        .glow-card p {
+            color: #333333;
+            line-height: 1.7;
+            font-weight: 500;
+        }
 
         /* スライドアップカード効果 */
         .slide-card {
             background: var(--white);
-            padding: 3.5rem 2.5rem;
-            border-radius: 25px;
+            padding: 3rem 2rem;
+            border-radius: 20px;
             box-shadow: 0 15px 50px rgba(0,0,0,0.08);
             text-align: center;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(0,201,167,0.1);
@@ -608,7 +715,7 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(90deg, #00c9a7, #43e97b, #00c9a7);
+            background: linear-gradient(90deg, var(--secondary-color), var(--yellow-medium), var(--secondary-color));
             transform: translateX(-100%);
             transition: transform 0.6s ease;
         }
@@ -618,13 +725,13 @@
         }
 
         .slide-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 80px rgba(0,201,167,0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.15);
         }
 
         .slide-card .slide-content {
             transform: translateY(0);
-            transition: transform 0.4s ease;
+            transition: transform 0.6s ease;
         }
 
         .slide-card:hover .slide-content {
@@ -642,31 +749,44 @@
             margin: 0 auto 2.5rem;
             color: var(--white);
             font-size: 2.2rem;
-            box-shadow: 0 10px 30px rgba(0,201,167,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
 
         .slide-card:hover .slide-icon {
             transform: scale(1.1) rotate(-5deg);
-            box-shadow: 0 15px 40px rgba(0,201,167,0.4);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+        
+        .slide-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+        
+        .slide-card p {
+            color: #333333;
+            line-height: 1.7;
+            font-weight: 500;
         }
 
         /* ズームカード効果 */
         .zoom-card {
             background: var(--white);
-            padding: 3.5rem 2.5rem;
-            border-radius: 25px;
+            padding: 3rem 2rem;
+            border-radius: 20px;
             box-shadow: 0 15px 50px rgba(0,0,0,0.08);
             text-align: center;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(0,201,167,0.1);
         }
 
         .zoom-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 25px 80px rgba(0,201,167,0.15);
+            transform: scale(1.03);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.15);
         }
 
         .zoom-card .zoom-icon {
@@ -680,13 +800,13 @@
             margin: 0 auto 2.5rem;
             color: var(--white);
             font-size: 2.2rem;
-            box-shadow: 0 10px 30px rgba(0,201,167,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
 
         .zoom-card:hover .zoom-icon {
             transform: scale(1.2);
-            box-shadow: 0 15px 40px rgba(0,201,167,0.4);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
         }
 
         .zoom-card .zoom-bg {
@@ -697,17 +817,32 @@
             height: 100%;
             background: linear-gradient(135deg, rgba(0,201,167,0.05) 0%, rgba(67,233,123,0.05) 100%);
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.3s ease;
         }
 
         .zoom-card:hover .zoom-bg {
             opacity: 1;
         }
+        
+        .zoom-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+        
+        .zoom-card p {
+            color: #333333;
+            line-height: 1.7;
+            font-weight: 500;
+        }
 
         /* 料金・保険・助成セクション */
         .pricing {
-            padding: 100px 0;
+            padding: 120px 0;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            position: relative;
+            overflow: hidden;
         }
 
         .pricing-grid {
@@ -771,8 +906,10 @@
 
         /* 治療フロー */
         .treatment-flow {
-            padding: 100px 0;
+            padding: 120px 0;
             background: var(--white);
+            position: relative;
+            overflow: hidden;
         }
 
         .flow-container {
@@ -869,20 +1006,12 @@
         }
 
         .cases .section-title {
-            color: var(--primary-color);
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            /* Inherits from main .section-title - for consistency */
         }
 
         .case-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2.5rem;
             margin-top: 3rem;
         }
@@ -891,7 +1020,7 @@
         .symptom-card {
             background: var(--white);
             border-radius: 20px;
-            padding: 3rem;
+            padding: 3rem 2rem;
             position: relative;
             transition: all 0.3s ease;
             box-shadow: 0 10px 40px rgba(0,0,0,0.08);
@@ -902,7 +1031,7 @@
         }
 
         .symptom-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             box-shadow: 0 20px 60px rgba(0,0,0,0.12);
             border-color: var(--accent-color);
         }
@@ -921,7 +1050,7 @@
         .symptom-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, var(--accent-color) 0%, #43e97b 100%);
+            background: var(--gradient-primary);
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -943,7 +1072,7 @@
             background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
             border-radius: 50%;
             opacity: 0.3;
-            animation: pulse 2s infinite;
+            animation: iconPulse 2s ease-in-out infinite;
         }
 
         @keyframes pulse {
@@ -1059,7 +1188,19 @@
         }
 
         .footer-section a:hover {
-            color: var(--accent-color);
+            color: #ffeb3b; /* Lighter yellow for better contrast on dark background */
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: all 0.2s ease;
+        }
+        
+        /* Focus state for footer links */
+        .footer-section a:focus {
+            outline: 2px solid #ffeb3b;
+            outline-offset: 2px;
+            border-radius: 4px;
+            padding: 2px 4px;
+            margin: -2px -4px;
         }
 
         .phone-number {
@@ -1110,83 +1251,201 @@
             }
         }
 
+        /* モバイルメニューボタン */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        .mobile-menu-toggle:hover {
+            background: rgba(255, 193, 7, 0.1);
+        }
+
         /* レスポンシブデザイン */
         @media (max-width: 768px) {
+            /* ナビゲーション */
+            .mobile-menu-toggle {
+                display: block;
+            }
+
             .nav-menu {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                border-top: 2px solid var(--secondary-color);
+                z-index: 1000;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-menu a {
+                display: block;
+                padding: 1rem 2rem;
+                width: 100%;
+                font-size: 1.1rem;
+            }
+
+            /* ヘッダー調整 */
+            .nav-container {
+                height: 70px;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            /* ヒーローセクション */
+            .hero {
+                padding-top: 100px;
+                min-height: auto;
             }
 
             .hero-content {
                 grid-template-columns: 1fr;
                 text-align: center;
+                gap: 2rem;
+                padding: 2rem 15px;
             }
 
             .hero-text h1 {
                 font-size: 2.5rem;
+                margin-bottom: 1rem;
             }
 
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-location {
+                font-size: 1rem;
+            }
+
+            .hero-text p {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            /* CTA ボタン */
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 0.8rem;
+                width: 100%;
             }
 
-            .flow-steps {
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+                padding: 16px 30px;
+                font-size: 1rem;
+                min-height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* 各種グリッド */
+            .features-grid,
+            .flow-steps,
+            .case-grid,
+            .pricing-grid {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
             .flow-line {
                 display: none;
             }
 
-            .case-grid {
-                grid-template-columns: 1fr;
-            }
-
+            /* セクションタイトル */
             .section-title {
                 font-size: 2rem;
+                margin-bottom: 2rem;
+                line-height: 1.2;
             }
 
+            /* サイドインジケーター */
             .side-indicator {
-                right: 15px;
+                right: 10px;
+                gap: 10px;
             }
 
+            .indicator-dot {
+                width: 10px;
+                height: 10px;
+            }
+
+            /* フローティングCTA */
             .floating-cta {
-                bottom: 15px;
-                right: 15px;
+                bottom: 20px;
+                right: 20px;
+                gap: 10px;
             }
 
-            /* 3Dフリップ効果のレスポンシブ調整 */
+            .floating-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 1.3rem;
+            }
+
+            /* カード調整 */
             .flip-card {
-                height: 350px;
+                height: 320px;
             }
             
             .flip-card-front, .flip-card-back {
                 padding: 1.5rem;
             }
 
-            .features-grid {
-                grid-template-columns: 1fr;
+            .flip-card h3 {
+                font-size: 1.3rem;
             }
 
-            .case-grid {
-                grid-template-columns: 1fr;
+            .flip-card p {
+                font-size: 0.95rem;
+                line-height: 1.5;
             }
 
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-
+            /* 価格 */
             .price {
                 font-size: 2rem;
             }
 
+            /* ケース画像 */
             .case-image {
-                height: 150px;
+                height: 180px;
             }
 
-            /* 新しいギミックのレスポンシブ調整 */
+            /* ギミックカード */
             .glow-card, .slide-card, .zoom-card {
                 padding: 2rem 1.5rem;
+                min-height: auto;
             }
 
             .glow-icon, .slide-icon, .zoom-icon, .symptom-icon {
@@ -1196,12 +1455,379 @@
                 margin-bottom: 1.5rem;
             }
 
-            .glow-card:hover, .slide-card:hover, .zoom-card:hover {
+            /* ホバー効果を軽減 */
+            .glow-card:hover, .slide-card:hover {
                 transform: translateY(-5px) scale(1.01);
             }
 
             .zoom-card:hover {
                 transform: scale(1.02);
+            }
+
+            /* パディング調整 */
+            .features, .symptoms, .flow, .cases, .pricing, .cta {
+                padding: 80px 0;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            /* フッター */
+            .footer {
+                padding: 40px 0 20px;
+            }
+
+            .phone-number {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* ヘッダー・ナビゲーション */
+            .nav-container {
+                height: 60px;
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .nav-menu a {
+                font-size: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+
+            /* ヒーローセクション */
+            .hero {
+                padding-top: 80px;
+                min-height: auto;
+            }
+
+            .hero-content {
+                padding: 1.5rem 15px;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+                line-height: 1.2;
+                margin-bottom: 0.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .hero-location {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+                line-height: 1.5;
+                margin-bottom: 1.2rem;
+            }
+
+            /* ボタン */
+            .btn-primary, .btn-secondary {
+                padding: 14px 25px;
+                font-size: 0.95rem;
+                min-height: 48px;
+            }
+
+            /* セクションタイトル */
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+                padding: 0 10px;
+            }
+
+            /* グリッド */
+            .features-grid,
+            .case-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            /* カード */
+            .flip-card {
+                height: 300px;
+                margin: 0 10px;
+            }
+
+            .flip-card-front, .flip-card-back {
+                padding: 1.2rem;
+            }
+
+            .flip-card h3 {
+                font-size: 1.2rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .flip-card p {
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+
+            .flip-card ul {
+                font-size: 0.9rem;
+            }
+
+            /* ギミックカード */
+            .glow-card, .slide-card, .zoom-card {
+                padding: 1.5rem 1.2rem;
+                margin: 0 10px;
+            }
+
+            .glow-icon, .slide-icon, .zoom-icon, .symptom-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .glow-card h3, .slide-card h3, .zoom-card h3 {
+                font-size: 1.2rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .glow-card p, .slide-card p, .zoom-card p {
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+
+            /* フローティングボタン */
+            .floating-cta {
+                bottom: 15px;
+                right: 15px;
+                gap: 8px;
+            }
+            
+            .floating-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            /* サイドインジケーター非表示 */
+            .side-indicator {
+                display: none;
+            }
+            
+            /* 言語切り替え */
+            .language-switcher {
+                top: 90px;
+                right: 15px;
+                transform: scale(0.9);
+            }
+
+            /* パディング調整 */
+            .features, .symptoms, .flow, .cases, .pricing, .cta {
+                padding: 60px 0;
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+
+            /* 価格カード */
+            .pricing-card {
+                padding: 1.5rem;
+            }
+
+            .price {
+                font-size: 1.8rem;
+            }
+
+            .price-label {
+                font-size: 0.9rem;
+            }
+
+            /* フッター */
+            .footer {
+                padding: 30px 0 15px;
+            }
+
+            .footer-content {
+                gap: 2rem;
+            }
+
+            .phone-number {
+                font-size: 1.3rem;
+            }
+
+            .footer-section h3 {
+                font-size: 1.1rem;
+            }
+
+            .footer-section p,
+            .footer-section a {
+                font-size: 0.9rem;
+            }
+
+            /* テキスト読みやすさ改善 */
+            p {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+
+            /* 画像調整 */
+            .hero-visual img {
+                border-radius: 10px;
+            }
+
+            .case-image {
+                height: 160px;
+            }
+
+            /* overflow対策 */
+            body {
+                overflow-x: hidden;
+            }
+
+            .hero, .features, .symptoms, .flow, .cases, .pricing, .cta {
+                overflow-x: hidden;
+            }
+
+            /* フローステップ調整 */
+            .flow-step {
+                padding: 1.5rem;
+            }
+
+            .flow-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .flow-step h3 {
+                font-size: 1.1rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .flow-step p {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            /* 症例カード調整 */
+            .symptom-card {
+                padding: 2rem 1.5rem;
+                margin: 0 10px;
+            }
+
+            .symptom-card h3 {
+                font-size: 1.2rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .symptom-card p {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            .symptom-card ul {
+                font-size: 0.85rem;
+                padding-left: 1.2rem;
+            }
+
+            /* 価格機能リスト */
+            .pricing-features {
+                font-size: 0.9rem;
+            }
+
+            .pricing-features li {
+                padding: 0.8rem 0.5rem;
+            }
+
+            /* ケースカード */
+            .case-card h3 {
+                font-size: 1.1rem;
+            }
+
+            .case-text {
+                padding: 1rem;
+            }
+
+            .case-text p {
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+
+            /* すべてのリストアイテム */
+            li {
+                line-height: 1.5;
+            }
+
+            /* タッチフレンドリーなリンク */
+            a {
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+            }
+
+            /* クリップパス調整 */
+            .features {
+                clip-path: none;
+                margin-top: 0;
+            }
+        }
+
+        /* 追加のモバイル最適化 */
+        @media (max-width: 768px) {
+            /* 画像の最大幅制限 */
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            /* テーブルのレスポンシブ化 */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            /* 長いテキストの折り返し */
+            h1, h2, h3, h4, h5, h6, p, span, a {
+                word-wrap: break-word;
+                word-break: break-word;
+            }
+
+            /* ボックスシャドウの軽減 */
+            .flip-card, .glow-card, .slide-card, .zoom-card, 
+            .symptom-card, .pricing-card, .case-card {
+                box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            }
+
+            /* アニメーションの軽減 */
+            * {
+                animation-duration: 0.3s !important;
+            }
+        }
+
+        /* タッチデバイス向け最適化 */
+        @media (hover: none) and (pointer: coarse) {
+            /* ホバー効果を無効化 */
+            .flip-card:hover .flip-card-inner {
+                transform: none;
+            }
+
+            /* タッチ時のフィードバック */
+            .btn-primary:active,
+            .btn-secondary:active,
+            .floating-btn:active {
+                transform: scale(0.98);
+            }
+
+            /* スクロールのスムーズ化 */
+            * {
+                -webkit-overflow-scrolling: touch;
             }
         }
 
@@ -1225,24 +1851,39 @@
             z-index: 997;
             background: rgba(255,255,255,0.9);
             backdrop-filter: blur(10px);
-            border-radius: 25px;
+            border-radius: 20px;
             padding: 10px;
             box-shadow: var(--shadow-soft);
         }
 
         .lang-btn {
             background: transparent;
-            border: none;
+            border: 2px solid transparent;
             padding: 8px 15px;
             border-radius: 20px;
             cursor: pointer;
             font-weight: 500;
             transition: all 0.3s ease;
+            color: var(--text-dark);
+        }
+        
+        /* Hover state */
+        .lang-btn:hover {
+            background: rgba(255,193,7,0.1);
+            border-color: var(--secondary-color);
+            transform: translateY(-1px);
+        }
+        
+        /* Focus state */
+        .lang-btn:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
         }
 
         .lang-btn.active {
             background: var(--gradient-accent);
-            color: var(--white);
+            color: #000000; /* Black text for better contrast on yellow gradient */
+            font-weight: 700;
         }
 
         /* 感動体験演出 */
@@ -1283,7 +1924,7 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s;
+            transition: left 0.3s ease;
         }
 
         .interactive-card:hover::before {
@@ -1350,11 +1991,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
+            color: #000000; /* Black icon for better contrast on yellow gradient */
             font-size: 1.5rem;
             cursor: pointer;
             box-shadow: var(--shadow-strong);
             z-index: 997;
+            font-weight: 900;
         }
 
         .ai-chat {
@@ -1398,11 +2040,26 @@
 
         .ai-input button {
             background: var(--accent-color);
-            color: var(--white);
-            border: none;
+            color: #000000; /* Black text for better contrast on orange background */
+            border: 2px solid transparent;
             padding: 0.5rem 1rem;
             border-radius: 20px;
             cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        
+        /* Hover state */
+        .ai-input button:hover {
+            background: #ff7043;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(255,152,0,0.3);
+        }
+        
+        /* Focus state */
+        .ai-input button:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
         }
 
         /* リアルタイム予約システム */
@@ -1411,7 +2068,8 @@
             border-radius: 20px;
             box-shadow: var(--shadow-soft);
             padding: 2rem;
-            margin: 2rem 0;
+            margin: 2rem auto;
+            max-width: 1200px;
         }
 
         .booking-form {
@@ -1433,36 +2091,62 @@
         }
 
         .form-group input,
-        .form-group select {
+        .form-group select,
+        .form-group textarea {
             padding: 0.8rem;
             border: 2px solid #eee;
             border-radius: 10px;
             font-size: 1rem;
             transition: border-color 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .form-group input:focus,
-        .form-group select:focus {
+        .form-group select:focus,
+        .form-group textarea:focus {
             outline: none;
             border-color: var(--accent-color);
         }
 
         .booking-btn {
             background: var(--gradient-accent);
-            color: var(--white);
+            color: #000000; /* Black text for better contrast */
             padding: 1rem 2rem;
-            border: none;
-            border-radius: 25px;
+            border: 2px solid transparent;
+            border-radius: 20px;
             font-size: 1.1rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
         }
+        
+        /* Focus state */
+        .booking-btn:focus {
+            outline: 3px solid #000000;
+            outline-offset: 2px;
+            border-color: #000000;
+        }
+        
+        /* Disabled state */
+        .booking-btn:disabled {
+            background: #cccccc;
+            color: #666666;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
 
-        .booking-btn:hover {
+        .booking-btn:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: var(--shadow-soft);
+            background: linear-gradient(135deg, #ffeb3b 0%, #f9a825 100%);
+            color: #000000;
+        }
+        
+        /* Active state */
+        .booking-btn:active:not(:disabled) {
+            transform: translateY(0);
         }
 
         /* パフォーマンス最適化 */
@@ -1488,20 +2172,6 @@
             margin-top: -50px;
         }
 
-        .symptom-details h4,
-        .symptom-details ul,
-        .symptom-details li,
-        .zoom-card p,
-        .zoom-card h3 {
-            color: #fff !important;
-            opacity: 1 !important;
-        }
-        .symptom-details li::before {
-            color: #43e97b !important;
-        }
-        .symptom-details {
-            background: rgba(0,0,0,0.08) !important;
-        }
     </style>
 </head>
 <body>
@@ -1514,7 +2184,10 @@
     <header class="header" id="header">
         <nav class="nav-container">
             <div class="logo">天下茶屋内科クリニック</div>
-            <ul class="nav-menu">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="メニューを開く">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="#home">ホーム</a></li>
                 <li><a href="#features">特徴</a></li>
                 <li><a href="#pricing">費用・保険</a></li>
@@ -1537,10 +2210,10 @@
 
     <!-- フローティングCTA -->
     <div class="floating-cta">
-        <a href="#contact" class="floating-btn" title="LINEで予約">
+        <a href="#contact" class="floating-btn" title="LINEで予約" aria-label="LINEで予約">
             <i class="fab fa-line"></i>
         </a>
-        <a href="tel:06-6653-2883" class="floating-btn" title="電話で予約">
+        <a href="tel:06-6653-2883" class="floating-btn" title="電話で予約" aria-label="電話で予約">
             <i class="fas fa-phone"></i>
         </a>
     </div>
@@ -1590,8 +2263,8 @@
                     <h3>現代社会で増える足のトラブル</h3>
                     <p>足は「第二の心臓」と呼ばれ、全身のバランスを支える重要な土台です。<br>足のアーチが崩れると、姿勢が悪くなり、膝や腰、肩への負担が増大。スポーツでのケガにもつながります。</p>
                     <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 15px; text-align: left;">
-                        <h4 style="color: #00c9a7; margin-bottom: 1rem;">📊 調査結果</h4>
-                        <p style="font-size: 0.95rem; color: #666;">小学生の40％以上に足部変形が見られ、これは姿勢の悪化や運動能力の低下、転倒リスクにつながります。</p>
+                        <h4 style="color: #00886d; margin-bottom: 1rem; font-weight: 700;">📊 調査結果</h4>
+                        <p style="font-size: 0.95rem; color: #333333; font-weight: 500;">小学生の40％以上に足部変形が見られ、これは姿勢の悪化や運動能力の低下、転倒リスクにつながります。</p>
                     </div>
                 </div>
                 <div class="glow-card scroll-animate">
@@ -1601,8 +2274,8 @@
                     <h3>オーダーメイドインソールの意義</h3>
                     <p>一人ひとりの足の形状に合わせて作製されるインソールは、足本来の機能を取り戻し、正しい姿勢へと導きます。<br>ケガをしない体づくりは、足元から始まります。</p>
                     <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 15px; text-align: left;">
-                        <h4 style="color: #00c9a7; margin-bottom: 1rem;">✨ 期待される効果</h4>
-                        <ul style="font-size: 0.95rem; color: #666; list-style: none; padding: 0;">
+                        <h4 style="color: #00886d; margin-bottom: 1rem; font-weight: 700;">✨ 期待される効果</h4>
+                        <ul style="font-size: 0.95rem; color: #333333; list-style: none; padding: 0; font-weight: 500;">
                             <li>✓ 変形の矯正</li>
                             <li>✓ 正しい足のポジション形成</li>
                             <li>✓ アーチ構造の形成による力の分散</li>
@@ -1661,7 +2334,7 @@
                     </div>
                 </div>
             </div>
-            <div style="margin-top:2rem; color:#888; font-size:1rem;">
+            <div style="margin-top:2rem; color:#333333; font-size:1rem; font-weight:500;">
         </div>
     </section>
 
@@ -1735,7 +2408,7 @@
     <section id="cases" class="cases">
         <div class="container">
             <h2 class="section-title scroll-animate">こんなお悩みありませんか？</h2>
-            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; color: #5a6c7d; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.8;">お子様の足の健康を守るために、以下の症状が気になる方はお気軽にご相談ください</p>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; color: #2d2d2d; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.8; font-weight: 500;">お子様の足の健康を守るために、以下の症状が気になる方はお気軽にご相談ください</p>
             <div class="case-grid">
                 <div class="symptom-card scroll-animate">
                     <div class="symptom-card-inner">
@@ -1804,9 +2477,9 @@
             <div style="text-align: center; margin-top: 4rem;">
                 <div style="background: linear-gradient(135deg, rgba(0,201,167,0.05) 0%, rgba(67,233,123,0.05) 100%); padding: 3rem; border-radius: 20px; border: 2px dashed rgba(0,201,167,0.3); position: relative; overflow: hidden;">
                     <div style="position: absolute; top: -30px; right: -30px; width: 100px; height: 100px; background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%); opacity: 0.1; border-radius: 50%;"></div>
-                    <div style="position: absolute; bottom: -40px; left: -40px; width: 120px; height: 120px; background: radial-gradient(circle, #43e97b 0%, transparent 70%); opacity: 0.1; border-radius: 50%;"></div>
+                    <div style="position: absolute; bottom: -40px; left: -40px; width: 120px; height: 120px; background: radial-gradient(circle, var(--yellow-medium) 0%, transparent 70%); opacity: 0.1; border-radius: 50%;"></div>
                     <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.8rem; font-weight: 700;">💡 お気軽にご相談ください</h3>
-                    <p style="font-size: 1.1rem; margin-bottom: 2rem; color: #5a6c7d; line-height: 1.8;">お子様の足の健康は、将来の体づくりの基盤となります。<br>少しでも気になることがあれば、専門医にご相談ください。</p>
+                    <p style="font-size: 1.1rem; margin-bottom: 2rem; color: #2d2d2d; line-height: 1.8; font-weight: 500;">お子様の足の健康は、将来の体づくりの基盤となります。<br>少しでも気になることがあれば、専門医にご相談ください。</p>
                     <a href="#contact" class="btn-primary" style="display: inline-block; margin-top: 1rem;">
                         <i class="fab fa-line"></i> 今すぐご相談・予約
                     </a>
@@ -1846,7 +2519,7 @@
     <div class="ai-diagnosis" id="aiDiagnosis">
         <div class="ai-header">
             <h3>AI診断</h3>
-            <button class="ai-toggle" onclick="toggleAI()">
+            <button class="ai-toggle" onclick="toggleAI()" aria-label="AI診断を閉じる">
                 <i class="fas fa-chevron-left"></i>
             </button>
         </div>
@@ -1855,13 +2528,14 @@
         </div>
         <div class="ai-input">
             <input type="text" id="aiInput" placeholder="質問を入力...">
-            <button onclick="askAI()">質問する</button>
+            <button onclick="askAI()" aria-label="AIに質問する">質問する</button>
         </div>
     </div>
 
     <!-- リアルタイム予約システム -->
-    <div class="booking-widget">
-        <h2>リアルタイム予約</h2>
+    <div class="container">
+        <div class="booking-widget">
+            <h2>リアルタイム予約</h2>
         <form class="booking-form" id="booking-form">
             <div class="form-group">
                 <label for="name">お名前</label>
@@ -1883,8 +2557,9 @@
                 <label for="symptoms">症状</label>
                 <textarea id="symptoms" required></textarea>
             </div>
-            <button type="submit" class="booking-btn">予約する</button>
+            <button type="submit" class="booking-btn" aria-label="診療予約を送信">予約する</button>
         </form>
+        </div>
     </div>
 
     <!-- 構造化データ -->
@@ -1918,6 +2593,26 @@
     </script>
 
     <script>
+        // モバイルメニュートグル
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            const isExpanded = navMenu.classList.contains('active');
+            this.setAttribute('aria-label', isExpanded ? 'メニューを閉じる' : 'メニューを開く');
+            this.innerHTML = isExpanded ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // メニューリンククリックで閉じる
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                mobileMenuToggle.setAttribute('aria-label', 'メニューを開く');
+            });
+        });
+
         // ヘッダーのスクロール効果
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
@@ -2001,11 +2696,22 @@
         });
 
         // パララックス効果
-        window.addEventListener('scroll', function() {
+        let ticking = false;
+        function updateParallax() {
             const scrolled = window.pageYOffset;
             const parallax = document.querySelector('.hero');
-            const speed = scrolled * 0.5;
-            parallax.style.transform = `translateY(${speed}px)`;
+            if (parallax && scrolled < window.innerHeight) {
+                const speed = scrolled * 0.3;
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+            ticking = false;
+        }
+        
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(updateParallax);
+                ticking = true;
+            }
         });
 
         // 多言語対応
@@ -2094,10 +2800,16 @@
         // AI診断機能
         function toggleAI() {
             const aiDiagnosis = document.getElementById('aiDiagnosis');
-            if (aiDiagnosis.classList.contains('open')) {
-                aiDiagnosis.classList.remove('open');
-            } else {
-                aiDiagnosis.classList.add('open');
+            if (aiDiagnosis) {
+                aiDiagnosis.style.display = 'block';
+                if (aiDiagnosis.classList.contains('open')) {
+                    aiDiagnosis.classList.remove('open');
+                    setTimeout(() => {
+                        aiDiagnosis.style.display = 'none';
+                    }, 300);
+                } else {
+                    aiDiagnosis.classList.add('open');
+                }
             }
         }
 
@@ -2148,29 +2860,29 @@
         // 光るカード効果のインタラクション
         document.querySelectorAll('.glow-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
+                this.style.transform = 'translateY(-8px)';
             });
             
             card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
+                this.style.transform = 'translateY(0)';
             });
         });
 
         // スライドアップカード効果のインタラクション
         document.querySelectorAll('.slide-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-15px) scale(1.02)';
+                this.style.transform = 'translateY(-10px)';
             });
             
             card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
+                this.style.transform = 'translateY(0)';
             });
         });
 
         // ズームカード効果のインタラクション
         document.querySelectorAll('.zoom-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.05)';
+                this.style.transform = 'scale(1.03)';
             });
             
             card.addEventListener('mouseleave', function() {
@@ -2214,6 +2926,24 @@
             
             // フォーカス可能にする
             card.setAttribute('tabindex', '0');
+        });
+        
+        // Ensure all buttons and links have proper keyboard navigation
+        document.querySelectorAll('button, a[href], input, select, textarea').forEach(element => {
+            // Add tabindex if not present
+            if (!element.hasAttribute('tabindex')) {
+                element.setAttribute('tabindex', '0');
+            }
+        });
+        
+        // Add visual feedback for button clicks
+        document.querySelectorAll('.btn-primary, .btn-secondary, .booking-btn, .lang-btn, .floating-btn').forEach(btn => {
+            btn.addEventListener('mousedown', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            btn.addEventListener('mouseup', function() {
+                this.style.transform = '';
+            });
         });
 
         // カードの音響効果（オプション）

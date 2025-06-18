@@ -8,16 +8,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #0f2027;
-            --secondary-color: #2c5364;
-            --accent-color: #00c9a7;
-            --gradient-primary: linear-gradient(135deg, #0f2027 0%, #2c5364 50%, #00c9a7 100%);
-            --gradient-accent: linear-gradient(135deg, #00c9a7 0%, #43e97b 100%);
-            --text-dark: #0f2027;
-            --text-light: #7F8C8D;
+            --primary-color: #2d2d2d;
+            --secondary-color: #ffc107;
+            --accent-color: #ff9800;
+            --yellow-light: #fff9e6;
+            --yellow-medium: #ffeb3b;
+            --yellow-dark: #f9a825;
+            --gradient-primary: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+            --gradient-accent: linear-gradient(135deg, #ffeb3b 0%, #ffc107 100%);
+            --text-dark: #212121;
+            --text-light: #616161;
             --white: #FFFFFF;
-            --shadow-soft: 0 10px 30px rgba(0,0,0,0.1);
-            --shadow-strong: 0 20px 60px rgba(0,0,0,0.15);
+            --bg-light: #fffef7;
+            --shadow-soft: 0 10px 30px rgba(255,193,7,0.15);
+            --shadow-strong: 0 20px 60px rgba(255,152,0,0.2);
         }
 
         * {
@@ -30,7 +34,7 @@
             font-family: 'Noto Sans JP', sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
-            background: var(--white);
+            background: var(--bg-light);
         }
 
         /* ヘッダー */
@@ -38,11 +42,11 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--white);
             backdrop-filter: blur(20px);
             z-index: 1000;
             transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 3px solid var(--secondary-color);
         }
 
         .nav-container {
