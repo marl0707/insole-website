@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>よくある質問・インソールの効果 - 天下茶屋内科クリニック</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0f2027;
+            --secondary-color: #2c5364;
+            --accent-color: #00c9a7;
+            --gradient-primary: linear-gradient(135deg, #0f2027 0%, #2c5364 50%, #00c9a7 100%);
+            --gradient-accent: linear-gradient(135deg, #00c9a7 0%, #43e97b 100%);
+            --text-dark: #0f2027;
+            --text-light: #7F8C8D;
+            --white: #FFFFFF;
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-strong: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+
+        /* ヘッダー */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15,32,39,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ヒーローセクション */
+        .hero {
+            min-height: 60vh;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* メインコンテンツ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Q&Aセクション */
+        .qa-container {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+
+        .qa-item {
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .qa-item:last-child {
+            border-bottom: none;
+        }
+
+        .qa-question {
+            padding: 2rem;
+            background: #f8f9fa;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .qa-question:hover {
+            background: #e9ecef;
+        }
+
+        .qa-question h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .qa-toggle {
+            width: 30px;
+            height: 30px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .qa-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .qa-answer.active {
+            padding: 2rem;
+            max-height: 500px;
+        }
+
+        .qa-answer p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .qa-answer ul {
+            color: var(--text-light);
+            margin-left: 1.5rem;
+        }
+
+        /* 効果セクション */
+        .effects-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .effects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .effect-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .effect-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .effect-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--white);
+            font-size: 2rem;
+        }
+
+        .effect-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .effect-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* フッター */
+        .footer {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .phone-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 1rem 0;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .effects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">天下茶屋内科クリニック</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="index.html#features">特徴</a></li>
+                <li><a href="index.html#pricing">費用・保険</a></li>
+                <li><a href="index.html#treatment">治療の流れ</a></li>
+                <li><a href="index.html#cases">対象となる方</a></li>
+                <li><a href="index.html#contact">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ヒーローセクション -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>よくある質問・インソールの効果</h1>
+            <p>インソール治療についてよくいただくご質問と、期待される効果について詳しくご説明します</p>
+        </div>
+    </section>
+
+    <!-- Q&Aセクション -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">よくある質問</h2>
+            <div class="qa-container">
+                <div class="qa-item">
+                    <div class="qa-question" onclick="toggleQA(this)">
+                        <h3>インソールはどのくらいの期間で効果が出ますか？</h3>
+                        <div class="qa-toggle">+</div>
+                    </div>
+                    <div class="qa-answer">
+                        <p>インソールの効果は個人差がありますが、一般的には装着後1-2週間で歩行時の安定感を実感される方が多いです。</p>
+                        <p>痛みの軽減については、症状の程度によって異なりますが、多くの場合1-3ヶ月で改善を実感されます。</p>
+                        <p><strong>効果を最大限に引き出すためのポイント：</strong></p>
+                        <ul>
+                            <li>毎日継続して装着する</li>
+                            <li>医師の指示に従って調整を受ける</li>
+                            <li>適切な靴と組み合わせて使用する</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="qa-question" onclick="toggleQA(this)">
+                        <h3>子どもの足の変形は治りますか？</h3>
+                        <div class="qa-toggle">+</div>
+                    </div>
+                    <div class="qa-answer">
+                        <p>成長期の子どもの足の変形は、適切な時期に処置することで大幅に改善される可能性があります。</p>
+                        <p>特に以下の場合に効果が期待できます：</p>
+                        <ul>
+                            <li>扁平足（8-12歳頃が最も効果的）</li>
+                            <li>外反母趾（早期発見・早期治療が重要）</li>
+                            <li>内反足（生後早期からの治療が効果的）</li>
+                        </ul>
+                        <p>ただし、変形の程度や年齢によって改善の可能性は異なりますので、まずは医師の診察をお受けください。</p>
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="qa-question" onclick="toggleQA(this)">
+                        <h3>保険適用の条件を教えてください</h3>
+                        <div class="qa-toggle">+</div>
+                    </div>
+                    <div class="qa-answer">
+                        <p>インソールは以下の疾患で保険適用となります：</p>
+                        <ul>
+                            <li>扁平足</li>
+                            <li>凹足（ハイアーチ）</li>
+                            <li>外反母趾</li>
+                            <li>足底腱膜炎</li>
+                            <li>モートン病</li>
+                            <li>胼胝（タコ）・鶏眼（ウオノメ）</li>
+                        </ul>
+                        <p><strong>保険適用の流れ：</strong></p>
+                        <ol>
+                            <li>医師の診断・処方</li>
+                            <li>インソール代金の全額を一旦お支払い</li>
+                            <li>ご自身で健康保険組合に請求</li>
+                            <li>保険給付金の支給</li>
+                        </ol>
+                        <p>18歳以下のお子様は、大阪市内在住の場合、小児医療費助成が利用できます。</p>
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="qa-question" onclick="toggleQA(this)">
+                        <h3>インソールの寿命はどのくらいですか？</h3>
+                        <div class="qa-toggle">+</div>
+                    </div>
+                    <div class="qa-answer">
+                        <p>インソールの寿命は使用頻度や体重、歩行量によって異なりますが、一般的には1-2年が目安です。</p>
+                        <p><strong>交換のタイミング：</strong></p>
+                        <ul>
+                            <li>インソールが変形してきた</li>
+                            <li>痛みが再発してきた</li>
+                            <li>靴底がすり減ってきた</li>
+                            <li>子どもの成長によりサイズが合わなくなった</li>
+                        </ul>
+                        <p>定期的なチェックアップで、適切な交換時期をご案内いたします。</p>
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="qa-question" onclick="toggleQA(this)">
+                        <h3>スポーツ用のインソールも作れますか？</h3>
+                        <div class="qa-toggle">+</div>
+                    </div>
+                    <div class="qa-answer">
+                        <p>はい、スポーツ用のインソールも製作可能です。スポーツの種類や競技レベルに応じて、最適なインソールを設計いたします。</p>
+                        <p><strong>スポーツ用インソールの特徴：</strong></p>
+                        <ul>
+                            <li>衝撃吸収性の向上</li>
+                            <li>安定性の向上</li>
+                            <li>パフォーマンスの向上</li>
+                            <li>ケガの予防</li>
+                        </ul>
+                        <p>ただし、スポーツ用インソールは保険適用外となりますので、自費診療となります。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 効果セクション -->
+    <section class="section effects-section">
+        <div class="container">
+            <h2 class="section-title">インソールの効果</h2>
+            <div class="effects-grid">
+                <div class="effect-card">
+                    <div class="effect-icon">
+                        <i class="fas fa-walking"></i>
+                    </div>
+                    <h3>歩行の安定性向上</h3>
+                    <p>足のアーチを適切にサポートすることで、歩行時の安定性が向上し、転倒やつまずきのリスクを軽減します。</p>
+                </div>
+                <div class="effect-card">
+                    <div class="effect-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>痛みの軽減</h3>
+                    <p>足の特定部位にかかる負担を分散し、足底腱膜炎や外反母趾などの痛みを軽減します。</p>
+                </div>
+                <div class="effect-card">
+                    <div class="effect-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>姿勢の改善</h3>
+                    <p>足のバランスを整えることで、全身の姿勢が改善され、膝や腰への負担も軽減されます。</p>
+                </div>
+                <div class="effect-card">
+                    <div class="effect-icon">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <h3>運動能力の向上</h3>
+                    <p>正しい足のポジションにより、運動時のパフォーマンスが向上し、ケガの予防にもつながります。</p>
+                </div>
+                <div class="effect-card">
+                    <div class="effect-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>疲労の軽減</h3>
+                    <p>効率的な歩行により、長時間の歩行や立ち仕事での疲労感が軽減されます。</p>
+                </div>
+                <div class="effect-card">
+                    <div class="effect-icon">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                    <h3>成長促進</h3>
+                    <p>子どもの場合、適切な足の成長をサポートし、健全な発達を促進します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>天下茶屋内科クリニック</h3>
+                    <p>〒557-0015<br>大阪府大阪市西成区花園南２丁目７−８ 泰山第一ビル １階</p>
+                    <div class="phone-number">06-6653-2883</div>
+                    <p>診療時間: 平日 9:00-18:00<br>土曜 9:00-13:00<br>休診日: 日曜・祝日</p>
+                </div>
+                <div class="footer-section">
+                    <h3>アクセス</h3>
+                    <p>天下茶屋駅から徒歩1分</p>
+                </div>
+                <div class="footer-section">
+                    <h3>ご連絡・お問い合わせ</h3>
+                    <p><a href="tel:06-6653-2883">📞 06-6653-2883</a></p>
+                    <p><a href="mailto:info@example.com">📧 info@example.com</a></p>
+                    <p><a href="#"><i class="fab fa-line"></i> 公式LINEで予約</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 天下茶屋内科クリニック. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Q&Aの開閉機能
+        function toggleQA(element) {
+            const answer = element.nextElementSibling;
+            const toggle = element.querySelector('.qa-toggle');
+            
+            if (answer.classList.contains('active')) {
+                answer.classList.remove('active');
+                toggle.textContent = '+';
+            } else {
+                // 他の開いているQ&Aを閉じる
+                document.querySelectorAll('.qa-answer.active').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelectorAll('.qa-toggle').forEach(item => {
+                    item.textContent = '+';
+                });
+                
+                // 選択されたQ&Aを開く
+                answer.classList.add('active');
+                toggle.textContent = '−';
+            }
+        }
+    </script>
+</body>
+</html> 

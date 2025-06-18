@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>インソール診断 - 天王寺東整形外科クリニック</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0f2027;
+            --secondary-color: #2c5364;
+            --accent-color: #00c9a7;
+            --gradient-primary: linear-gradient(135deg, #0f2027 0%, #2c5364 50%, #00c9a7 100%);
+            --gradient-accent: linear-gradient(135deg, #00c9a7 0%, #43e97b 100%);
+            --text-dark: #0f2027;
+            --text-light: #7F8C8D;
+            --white: #FFFFFF;
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-strong: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+
+        /* ヘッダー */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15,32,39,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ヒーローセクション */
+        .hero {
+            min-height: 60vh;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* メインコンテンツ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 診断シミュレーター */
+        .diagnosis-container {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .question-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .question {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-btn {
+            background: var(--white);
+            border: 2px solid #eee;
+            padding: 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .option-btn:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .option-btn.selected {
+            background: var(--gradient-accent);
+            color: var(--white);
+            border-color: var(--accent-color);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-accent);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* 結果表示 */
+        .result-container {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .result-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            color: var(--white);
+            font-size: 3rem;
+        }
+
+        .result-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .result-description {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .recommendation {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .recommendation h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .recommendation ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        .recommendation li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .recommendation li:last-child {
+            border-bottom: none;
+        }
+
+        .cta-section {
+            margin-top: 2rem;
+        }
+
+        .cta-btn {
+            background: var(--gradient-accent);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* 3Dモデルビューア */
+        .model-viewer {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .model-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* 患者の声 */
+        .testimonials {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+        }
+
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 2rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* フッター */
+        .footer {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .phone-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 1rem 0;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">天王寺東整形外科クリニック</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="treatment.html">治療内容</a></li>
+                <li><a href="cases.html">症例</a></li>
+                <li><a href="diagnosis.html">診断</a></li>
+                <li><a href="access.html">アクセス</a></li>
+                <li><a href="contact.html">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ヒーローセクション -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>インソール診断</h1>
+            <p>あなたの足の状態をチェックして、最適なインソールをご提案します</p>
+        </div>
+    </section>
+
+    <!-- 診断シミュレーター -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">あなたの足の状態を診断</h2>
+            <div class="diagnosis-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="question-container">
+                    <div class="question" id="questionText">足の痛みはどの部位にありますか？</div>
+                    <div class="options" id="optionsContainer">
+                        <button class="option-btn" data-value="heel">かかと</button>
+                        <button class="option-btn" data-value="arch">土踏まず</button>
+                        <button class="option-btn" data-value="toes">足の指</button>
+                        <button class="option-btn" data-value="none">痛みはない</button>
+                    </div>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="nav-btn" id="prevBtn" disabled>前へ</button>
+                    <button class="nav-btn" id="nextBtn">次へ</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3Dモデルビューア -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">3Dインソールモデル</h2>
+            <div class="model-viewer">
+                <div class="model-placeholder">
+                    <div>
+                        <i class="fas fa-cube" style="font-size: 4rem; margin-bottom: 1rem; display: block;"></i>
+                        3Dインソールモデル<br>
+                        インタラクティブな3Dビューアで<br>
+                        インソールの構造を確認できます
+                    </div>
+                </div>
+                <p>実際のインソールの構造や素材を3Dで確認できます。回転・ズーム・断面表示が可能です。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 患者の声 -->
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-title">患者様の声</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <p class="testimonial-text">「長年悩んでいた足の痛みが、インソールを装着してから劇的に改善しました。歩くのが楽しくなりました。」</p>
+                    <div class="testimonial-author">40代女性</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <p class="testimonial-text">「スポーツ時のパフォーマンスが向上し、ケガも減りました。本当に感謝しています。」</p>
+                    <div class="testimonial-author">30代男性</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <p class="testimonial-text">「子供の扁平足が心配でしたが、適切な処置で改善されました。早期発見の大切さを実感しました。」</p>
+                    <div class="testimonial-author">35代女性</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>天王寺東整形外科クリニック</h3>
+                    <p>〒000-0000<br>大阪市天王寺区○○町0-0-0</p>
+                    <div class="phone-number">06-6653-2883</div>
+                    <p>診療時間: 平日 9:00-18:00<br>土曜 9:00-13:00<br>休診日: 日曜・祝日</p>
+                </div>
+                <div class="footer-section">
+                    <h3>アクセス</h3>
+                    <p>天王寺駅から徒歩5分<br>地下鉄御堂筋線・谷町線<br>JR環状線・大和路線</p>
+                </div>
+                <div class="footer-section">
+                    <h3>お問い合わせ</h3>
+                    <p><a href="tel:06-6653-2883">📞 06-6653-2883</a></p>
+                    <p><a href="mailto:info@example.com">📧 info@example.com</a></p>
+                    <p><a href="#"><i class="fab fa-line"></i> LINEで予約</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 天王寺東整形外科クリニック. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 診断シミュレーター
+        const questions = [
+            {
+                question: "足の痛みはどの部位にありますか？",
+                options: [
+                    { text: "かかと", value: "heel" },
+                    { text: "土踏まず", value: "arch" },
+                    { text: "足の指", value: "toes" },
+                    { text: "痛みはない", value: "none" }
+                ]
+            },
+            {
+                question: "どのような時に痛みを感じますか？",
+                options: [
+                    { text: "朝起きて最初の一歩", value: "morning" },
+                    { text: "長時間歩いた後", value: "walking" },
+                    { text: "スポーツ時", value: "sports" },
+                    { text: "立ち仕事の後", value: "standing" }
+                ]
+            },
+            {
+                question: "足の形について、どのように感じていますか？",
+                options: [
+                    { text: "土踏まずがない（扁平足）", value: "flat" },
+                    { text: "土踏まずが高すぎる", value: "high" },
+                    { text: "親指が曲がっている", value: "bunion" },
+                    { text: "特に問題はない", value: "normal" }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+
+        function updateQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('questionText').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'option-btn';
+                button.textContent = option.text;
+                button.dataset.value = option.value;
+                button.addEventListener('click', selectOption);
+                optionsContainer.appendChild(button);
+            });
+
+            // プログレスバー更新
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            // ボタン状態更新
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            document.getElementById('nextBtn').textContent = currentQuestion === questions.length - 1 ? '結果を見る' : '次へ';
+        }
+
+        function selectOption(event) {
+            // 他のオプションの選択を解除
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // 選択されたオプションをハイライト
+            event.target.classList.add('selected');
+            
+            // 答えを保存
+            answers[currentQuestion] = event.target.dataset.value;
+        }
+
+        function showResult() {
+            const diagnosisContainer = document.querySelector('.diagnosis-container');
+            diagnosisContainer.innerHTML = `
+                <div class="result-container">
+                    <div class="result-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3 class="result-title">診断結果</h3>
+                    <p class="result-description">
+                        あなたの足の状態を分析した結果、専門的な診察をお勧めします。
+                        詳細な診断と最適なインソールのご提案をさせていただきます。
+                    </p>
+                    <div class="recommendation">
+                        <h3>推奨される対応</h3>
+                        <ul>
+                            <li>専門医による詳細な診察</li>
+                            <li>3Dスキャンによる足の形状分析</li>
+                            <li>オーダーメイドインソールの作製</li>
+                            <li>定期的なフォローアップ</li>
+                        </ul>
+                    </div>
+                    <div class="cta-section">
+                        <a href="contact.html" class="cta-btn">予約を取る</a>
+                        <a href="tel:06-6653-2883" class="cta-btn">電話で相談</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // イベントリスナー
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                updateQuestion();
+            } else {
+                showResult();
+            }
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                updateQuestion();
+            }
+        });
+
+        // 初期化
+        updateQuestion();
+    </script>
+</body>
+</html> 

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医師・スタッフ紹介 - 天王寺東整形外科クリニック</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0f2027;
+            --secondary-color: #2c5364;
+            --accent-color: #00c9a7;
+            --gradient-primary: linear-gradient(135deg, #0f2027 0%, #2c5364 50%, #00c9a7 100%);
+            --gradient-accent: linear-gradient(135deg, #00c9a7 0%, #43e97b 100%);
+            --text-dark: #0f2027;
+            --text-light: #7F8C8D;
+            --white: #FFFFFF;
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-strong: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+
+        /* ヘッダー */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15,32,39,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ヒーローセクション */
+        .hero {
+            min-height: 60vh;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* メインコンテンツ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 医師紹介 */
+        .doctor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .doctor-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .doctor-image {
+            width: 100%;
+            height: 300px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 4rem;
+        }
+
+        .doctor-content {
+            padding: 2rem;
+        }
+
+        .doctor-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .doctor-title {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .doctor-description {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .doctor-specialties {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .doctor-specialties li {
+            padding: 0.3rem 0;
+            color: var(--text-light);
+        }
+
+        .doctor-specialties li::before {
+            content: '✓';
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* スタッフ紹介 */
+        .staff-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .staff-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .staff-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .staff-avatar {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--white);
+            font-size: 2.5rem;
+        }
+
+        .staff-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .staff-role {
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .staff-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* 実績・資格 */
+        .credentials {
+            background: var(--white);
+        }
+
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .credential-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .credential-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .credential-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        .credential-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .credential-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* フッター */
+        .footer {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .phone-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 1rem 0;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .doctor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .staff-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .credentials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">天王寺東整形外科クリニック</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="treatment.html">治療内容</a></li>
+                <li><a href="cases.html">症例</a></li>
+                <li><a href="doctor.html">医師紹介</a></li>
+                <li><a href="access.html">アクセス</a></li>
+                <li><a href="contact.html">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ヒーローセクション -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>医師・スタッフ紹介</h1>
+            <p>豊富な経験と最新技術で、あなたの足の健康をサポートします</p>
+        </div>
+    </section>
+
+    <!-- 医師紹介 -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">専門医の紹介</h2>
+            <div class="doctor-grid">
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="doctor-content">
+                        <h3 class="doctor-name">田中 健一 医師</h3>
+                        <div class="doctor-title">院長・整形外科専門医</div>
+                        <p class="doctor-description">
+                            20年以上の整形外科診療経験を持ち、特に足部疾患の治療に精通しています。
+                            最新の3Dスキャン技術と従来の診療経験を組み合わせ、一人一人に最適な治療を提供します。
+                        </p>
+                        <ul class="doctor-specialties">
+                            <li>足部外科専門</li>
+                            <li>スポーツ医学</li>
+                            <li>インソール治療</li>
+                            <li>関節鏡手術</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="doctor-content">
+                        <h3 class="doctor-name">佐藤 美咲 医師</h3>
+                        <div class="doctor-title">副院長・リハビリテーション専門医</div>
+                        <p class="doctor-description">
+                            リハビリテーション医学を専門とし、患者様の生活の質向上に重点を置いた治療を行っています。
+                            インソール治療後のフォローアップも含め、長期的な健康管理をサポートします。
+                        </p>
+                        <ul class="doctor-specialties">
+                            <li>リハビリテーション医学</li>
+                            <li>運動療法</li>
+                            <li>高齢者医療</li>
+                            <li>予防医学</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- スタッフ紹介 -->
+    <section class="section staff-section">
+        <div class="container">
+            <h2 class="section-title">スタッフ紹介</h2>
+            <div class="staff-grid">
+                <div class="staff-card">
+                    <div class="staff-avatar">
+                        <i class="fas fa-user-nurse"></i>
+                    </div>
+                    <h3 class="staff-name">山田 花子</h3>
+                    <div class="staff-role">看護師長</div>
+                    <p class="staff-description">
+                        15年の看護経験を持ち、患者様の不安や疑問に丁寧にお答えします。
+                        インソール治療のサポートも担当しています。
+                    </p>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-avatar">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <h3 class="staff-name">鈴木 太郎</h3>
+                    <div class="staff-role">義肢装具士</div>
+                    <p class="staff-description">
+                        義肢装具士の資格を持ち、インソールの設計・製作を担当しています。
+                        最新の3D技術と手作業の技を組み合わせた高品質なインソールを提供します。
+                    </p>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="staff-name">高橋 愛</h3>
+                    <div class="staff-role">受付・医療事務</div>
+                    <p class="staff-description">
+                        患者様の予約管理や保険手続きを担当しています。
+                        初めての方でも安心してご来院いただけるよう、丁寧にサポートいたします。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 実績・資格 -->
+    <section class="section credentials">
+        <div class="container">
+            <h2 class="section-title">実績・資格</h2>
+            <div class="credentials-grid">
+                <div class="credential-card">
+                    <div class="credential-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3 class="credential-title">日本整形外科学会認定専門医</h3>
+                    <p class="credential-description">整形外科の専門知識と技術を認められた資格</p>
+                </div>
+                <div class="credential-card">
+                    <div class="credential-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="credential-title">足部外科専門医</h3>
+                    <p class="credential-description">足部疾患の専門的な治療が可能</p>
+                </div>
+                <div class="credential-card">
+                    <div class="credential-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3 class="credential-title">スポーツ医学認定医</h3>
+                    <p class="credential-description">スポーツ関連の傷害治療の専門家</p>
+                </div>
+                <div class="credential-card">
+                    <div class="credential-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="credential-title">医学博士</h3>
+                    <p class="credential-description">足部疾患に関する研究で博士号を取得</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>天王寺東整形外科クリニック</h3>
+                    <p>〒000-0000<br>大阪市天王寺区○○町0-0-0</p>
+                    <div class="phone-number">06-6653-2883</div>
+                    <p>診療時間: 平日 9:00-18:00<br>土曜 9:00-13:00<br>休診日: 日曜・祝日</p>
+                </div>
+                <div class="footer-section">
+                    <h3>アクセス</h3>
+                    <p>天王寺駅から徒歩5分<br>地下鉄御堂筋線・谷町線<br>JR環状線・大和路線</p>
+                </div>
+                <div class="footer-section">
+                    <h3>お問い合わせ</h3>
+                    <p><a href="tel:06-6653-2883">📞 06-6653-2883</a></p>
+                    <p><a href="mailto:info@example.com">📧 info@example.com</a></p>
+                    <p><a href="#"><i class="fab fa-line"></i> LINEで予約</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 天王寺東整形外科クリニック. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
