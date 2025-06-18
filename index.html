@@ -791,26 +791,13 @@
             z-index: 1;
         }
 
+        /* 治療フローセクションの3Dフリップ対応 */
         .flow-steps {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
             position: relative;
             z-index: 2;
-        }
-
-        .flow-step {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.3s ease;
-        }
-
-        .flow-step:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-strong);
         }
 
         .step-number {
@@ -858,37 +845,12 @@
             margin-top: 3rem;
         }
 
-        .case-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .case-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
         .case-image {
             width: 100%;
-            height: 250px;
+            height: 200px;
             object-fit: cover;
             border-radius: 15px;
             margin-bottom: 1.5rem;
-        }
-
-        .case-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .case-card p {
-            line-height: 1.8;
-            opacity: 0.9;
         }
 
         /* フッター */
@@ -2097,7 +2059,7 @@
         setInterval(createFloatingElement, 3000);
 
         // インタラクティブ要素にホバー効果を追加
-        document.querySelectorAll('.feature-card, .pricing-card, .flow-step, .case-card').forEach(card => {
+        document.querySelectorAll('.flip-card, .glow-card, .slide-card, .zoom-card').forEach(card => {
             card.classList.add('interactive-card');
         });
 
